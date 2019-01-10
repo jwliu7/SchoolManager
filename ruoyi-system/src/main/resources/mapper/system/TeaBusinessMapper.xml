@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TeaBusinessMapper">
+    
+    <resultMap type="TeaBusiness" id="BusinessResult">
+        <result property="id"    column="id"    />
+        <result property="teaid"    column="teaid"    />
+        <result property="name"    column="name"    />
+        <result property="teaSemester"    column="tea_semester"    />
+        <result property="curriculum"    column="curriculum"    />
+        <result property="teachClass"    column="teach_class"    />
+        <result property="stuNumber"    column="stu_number"    />
+        <result property="weeks"    column="weeks"    />
+        <result property="weekPeriod"    column="week_period"    />
+        <result property="expeCourse"    column="expe_course"    />
+        <result property="expeCourseTime"    column="expe_course_time"    />
+        <result property="guideInternship"    column="guide_internship"    />
+        <result property="guideGraduation"    column="guide_graduation"    />
+        <result property="guideGraduate"    column="guide_graduate"    />
+        <result property="newCourse"    column="new_course"    />
+    </resultMap>
+	
+	<sql id="selectBusinessVo">
+        select id, teaid, name, tea_semester, curriculum, teach_class, stu_number, weeks, week_period, expe_course, expe_course_time, guide_internship, guide_graduation, guide_graduate, new_course from tea_business
+    </sql>
+	
+    <select id="selectBusinessList" parameterType="TeaBusiness" resultMap="BusinessResult">
+        <include refid="selectBusinessVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="teaid != null "> and teaid = #{teaid}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="teaSemester != null  and teaSemester != '' "> and tea_semester = #{teaSemester}</if>
+             <if test="curriculum != null  and curriculum != '' "> and curriculum = #{curriculum}</if>
+             <if test="teachClass != null  and teachClass != '' "> and teach_class = #{teachClass}</if>
+             <if test="stuNumber != null "> and stu_number = #{stuNumber}</if>
+             <if test="weeks != null "> and weeks = #{weeks}</if>
+             <if test="weekPeriod != null "> and week_period = #{weekPeriod}</if>
+             <if test="expeCourse != null  and expeCourse != '' "> and expe_course = #{expeCourse}</if>
+             <if test="expeCourseTime != null "> and expe_course_time = #{expeCourseTime}</if>
+             <if test="guideInternship != null  and guideInternship != '' "> and guide_internship = #{guideInternship}</if>
+             <if test="guideGraduation != null  and guideGraduation != '' "> and guide_graduation = #{guideGraduation}</if>
+             <if test="guideGraduate != null  and guideGraduate != '' "> and guide_graduate = #{guideGraduate}</if>
+             <if test="newCourse != null "> and new_course = #{newCourse}</if>
+         </where>
+    </select>
+    
+    <select id="selectBusinessById" parameterType="Integer" resultMap="BusinessResult">
+        <include refid="selectBusinessVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertBusiness" parameterType="TeaBusiness">
+        insert into tea_business
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="teaid != null  ">teaid,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="teaSemester != null  and teaSemester != ''  ">tea_semester,</if>
+			<if test="curriculum != null  and curriculum != ''  ">curriculum,</if>
+			<if test="teachClass != null  and teachClass != ''  ">teach_class,</if>
+			<if test="stuNumber != null  ">stu_number,</if>
+			<if test="weeks != null  ">weeks,</if>
+			<if test="weekPeriod != null  ">week_period,</if>
+			<if test="expeCourse != null  and expeCourse != ''  ">expe_course,</if>
+			<if test="expeCourseTime != null  ">expe_course_time,</if>
+			<if test="guideInternship != null  and guideInternship != ''  ">guide_internship,</if>
+			<if test="guideGraduation != null  and guideGraduation != ''  ">guide_graduation,</if>
+			<if test="guideGraduate != null  and guideGraduate != ''  ">guide_graduate,</if>
+			<if test="newCourse != null  ">new_course,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="teaid != null  ">#{teaid},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="teaSemester != null  and teaSemester != ''  ">#{teaSemester},</if>
+			<if test="curriculum != null  and curriculum != ''  ">#{curriculum},</if>
+			<if test="teachClass != null  and teachClass != ''  ">#{teachClass},</if>
+			<if test="stuNumber != null  ">#{stuNumber},</if>
+			<if test="weeks != null  ">#{weeks},</if>
+			<if test="weekPeriod != null  ">#{weekPeriod},</if>
+			<if test="expeCourse != null  and expeCourse != ''  ">#{expeCourse},</if>
+			<if test="expeCourseTime != null  ">#{expeCourseTime},</if>
+			<if test="guideInternship != null  and guideInternship != ''  ">#{guideInternship},</if>
+			<if test="guideGraduation != null  and guideGraduation != ''  ">#{guideGraduation},</if>
+			<if test="guideGraduate != null  and guideGraduate != ''  ">#{guideGraduate},</if>
+			<if test="newCourse != null  ">#{newCourse},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateBusiness" parameterType="TeaBusiness">
+        update tea_business
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teaid != null  ">teaid = #{teaid},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="teaSemester != null  and teaSemester != ''  ">tea_semester = #{teaSemester},</if>
+            <if test="curriculum != null  and curriculum != ''  ">curriculum = #{curriculum},</if>
+            <if test="teachClass != null  and teachClass != ''  ">teach_class = #{teachClass},</if>
+            <if test="stuNumber != null  ">stu_number = #{stuNumber},</if>
+            <if test="weeks != null  ">weeks = #{weeks},</if>
+            <if test="weekPeriod != null  ">week_period = #{weekPeriod},</if>
+            <if test="expeCourse != null  and expeCourse != ''  ">expe_course = #{expeCourse},</if>
+            <if test="expeCourseTime != null  ">expe_course_time = #{expeCourseTime},</if>
+            <if test="guideInternship != null  and guideInternship != ''  ">guide_internship = #{guideInternship},</if>
+            <if test="guideGraduation != null  and guideGraduation != ''  ">guide_graduation = #{guideGraduation},</if>
+            <if test="guideGraduate != null  and guideGraduate != ''  ">guide_graduate = #{guideGraduate},</if>
+            <if test="newCourse != null  ">new_course = #{newCourse},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteBusinessById" parameterType="Integer">
+        delete from tea_business where id = #{id}
+    </delete>
+	
+    <delete id="deleteBusinessByIds" parameterType="String">
+        delete from tea_business where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

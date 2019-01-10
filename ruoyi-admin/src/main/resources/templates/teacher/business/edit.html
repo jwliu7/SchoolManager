@@ -1,0 +1,115 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-business-edit" th:object="${business}">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">工号：</label>
+                <div class="col-sm-8">
+                    <input id="teaid" name="teaid" th:field="*{teaid}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">教师姓名：</label>
+                <div class="col-sm-8">
+                    <input id="name" name="name" th:field="*{name}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">任教学期：</label>
+                <div class="col-sm-8">
+                    <input id="teaSemester" name="teaSemester" th:field="*{teaSemester}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">所教课程：</label>
+                <div class="col-sm-8">
+                    <input id="curriculum" name="curriculum" th:field="*{curriculum}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">班级：</label>
+                <div class="col-sm-8">
+                    <input id="teachClass" name="teachClass" th:field="*{teachClass}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">学生人数：</label>
+                <div class="col-sm-8">
+                    <input id="stuNumber" name="stuNumber" th:field="*{stuNumber}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">周数：</label>
+                <div class="col-sm-8">
+                    <input id="weeks" name="weeks" th:field="*{weeks}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">周学时数：</label>
+                <div class="col-sm-8">
+                    <input id="weekPeriod" name="weekPeriod" th:field="*{weekPeriod}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">实验课程：</label>
+                <div class="col-sm-8">
+                    <input id="expeCourse" name="expeCourse" th:field="*{expeCourse}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">实验课学时数：</label>
+                <div class="col-sm-8">
+                    <input id="expeCourseTime" name="expeCourseTime" th:field="*{expeCourseTime}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">指导实习情况：</label>
+                <div class="col-sm-8">
+                    <input id="guideInternship" name="guideInternship" th:field="*{guideInternship}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">指导毕业论文情况：</label>
+                <div class="col-sm-8">
+                    <input id="guideGraduation" name="guideGraduation" th:field="*{guideGraduation}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">指导研究生情况：</label>
+                <div class="col-sm-8">
+                    <input id="guideGraduate" name="guideGraduate" th:field="*{guideGraduate}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">是否新开课：</label>
+                <div class="col-sm-8">
+                    <select id="newCourse" name="newCourse" class="form-control m-b" th:with="type=${@dict.getType('sys_newCourse')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{newCourse}"></option>
+                    </select>
+                </div>
+            </div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "teacher/business"
+		$("#form-business-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-business-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

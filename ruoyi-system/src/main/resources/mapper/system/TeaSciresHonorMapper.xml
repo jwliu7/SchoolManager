@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TeaSciresHonorMapper">
+    
+    <resultMap type="TeaSciresHonor" id="SciresHonorResult">
+        <result property="id"    column="id"    />
+        <result property="teaid"    column="teaid"    />
+        <result property="name"    column="name"    />
+        <result property="paperTopics"    column="paper_topics"    />
+        <result property="publication"    column="publication"    />
+        <result property="publishedTime"    column="published_time"    />
+        <result property="awards"    column="awards"    />
+        <result property="researchSubject"    column="research_subject"    />
+        <result property="topicSource"    column="topic_source"    />
+        <result property="researchProject"    column="research_project"    />
+        <result property="fromYear"    column="from_year"    />
+        <result property="myRole"    column="my_role"    />
+        <result property="award"    column="award"    />
+        <result property="awardLevel"    column="award_level"    />
+        <result property="certificateHonor"    column="certificate_honor"    />
+    </resultMap>
+	
+	<sql id="selectSciresHonorVo">
+        select id, teaid, name, paper_topics, publication, published_time, awards, research_subject, topic_source, research_project, from_year, my_role, award, award_level, certificate_honor from tea_scires_honor
+    </sql>
+	
+    <select id="selectSciresHonorList" parameterType="TeaSciresHonor" resultMap="SciresHonorResult">
+        <include refid="selectSciresHonorVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="teaid != null "> and teaid = #{teaid}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="paperTopics != null  and paperTopics != '' "> and paper_topics = #{paperTopics}</if>
+             <if test="publication != null  and publication != '' "> and publication = #{publication}</if>
+             <if test="publishedTime != null "> and published_time = #{publishedTime}</if>
+             <if test="awards != null  and awards != '' "> and awards = #{awards}</if>
+             <if test="researchSubject != null  and researchSubject != '' "> and research_subject = #{researchSubject}</if>
+             <if test="topicSource != null  and topicSource != '' "> and topic_source = #{topicSource}</if>
+             <if test="researchProject != null  and researchProject != '' "> and research_project = #{researchProject}</if>
+             <if test="fromYear != null  and fromYear != '' "> and from_year = #{fromYear}</if>
+             <if test="myRole != null  and myRole != '' "> and my_role = #{myRole}</if>
+             <if test="award != null  and award != '' "> and award = #{award}</if>
+             <if test="awardLevel != null  and awardLevel != '' "> and award_level = #{awardLevel}</if>
+             <if test="certificateHonor != null  and certificateHonor != '' "> and certificate_honor = #{certificateHonor}</if>
+         </where>
+    </select>
+    
+    <select id="selectSciresHonorById" parameterType="Integer" resultMap="SciresHonorResult">
+        <include refid="selectSciresHonorVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertSciresHonor" parameterType="TeaSciresHonor">
+        insert into tea_scires_honor
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="teaid != null  ">teaid,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="paperTopics != null  and paperTopics != ''  ">paper_topics,</if>
+			<if test="publication != null  and publication != ''  ">publication,</if>
+			<if test="publishedTime != null  ">published_time,</if>
+			<if test="awards != null  and awards != ''  ">awards,</if>
+			<if test="researchSubject != null  and researchSubject != ''  ">research_subject,</if>
+			<if test="topicSource != null  and topicSource != ''  ">topic_source,</if>
+			<if test="researchProject != null  and researchProject != ''  ">research_project,</if>
+			<if test="fromYear != null  and fromYear != ''  ">from_year,</if>
+			<if test="myRole != null  and myRole != ''  ">my_role,</if>
+			<if test="award != null  and award != ''  ">award,</if>
+			<if test="awardLevel != null  and awardLevel != ''  ">award_level,</if>
+			<if test="certificateHonor != null  and certificateHonor != ''  ">certificate_honor,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="teaid != null  ">#{teaid},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="paperTopics != null  and paperTopics != ''  ">#{paperTopics},</if>
+			<if test="publication != null  and publication != ''  ">#{publication},</if>
+			<if test="publishedTime != null  ">#{publishedTime},</if>
+			<if test="awards != null  and awards != ''  ">#{awards},</if>
+			<if test="researchSubject != null  and researchSubject != ''  ">#{researchSubject},</if>
+			<if test="topicSource != null  and topicSource != ''  ">#{topicSource},</if>
+			<if test="researchProject != null  and researchProject != ''  ">#{researchProject},</if>
+			<if test="fromYear != null  and fromYear != ''  ">#{fromYear},</if>
+			<if test="myRole != null  and myRole != ''  ">#{myRole},</if>
+			<if test="award != null  and award != ''  ">#{award},</if>
+			<if test="awardLevel != null  and awardLevel != ''  ">#{awardLevel},</if>
+			<if test="certificateHonor != null  and certificateHonor != ''  ">#{certificateHonor},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateSciresHonor" parameterType="TeaSciresHonor">
+        update tea_scires_honor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teaid != null  ">teaid = #{teaid},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="paperTopics != null  and paperTopics != ''  ">paper_topics = #{paperTopics},</if>
+            <if test="publication != null  and publication != ''  ">publication = #{publication},</if>
+            <if test="publishedTime != null  ">published_time = #{publishedTime},</if>
+            <if test="awards != null  and awards != ''  ">awards = #{awards},</if>
+            <if test="researchSubject != null  and researchSubject != ''  ">research_subject = #{researchSubject},</if>
+            <if test="topicSource != null  and topicSource != ''  ">topic_source = #{topicSource},</if>
+            <if test="researchProject != null  and researchProject != ''  ">research_project = #{researchProject},</if>
+            <if test="fromYear != null  and fromYear != ''  ">from_year = #{fromYear},</if>
+            <if test="myRole != null  and myRole != ''  ">my_role = #{myRole},</if>
+            <if test="award != null  and award != ''  ">award = #{award},</if>
+            <if test="awardLevel != null  and awardLevel != ''  ">award_level = #{awardLevel},</if>
+            <if test="certificateHonor != null  and certificateHonor != ''  ">certificate_honor = #{certificateHonor},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteSciresHonorById" parameterType="Integer">
+        delete from tea_scires_honor where id = #{id}
+    </delete>
+	
+    <delete id="deleteSciresHonorByIds" parameterType="String">
+        delete from tea_scires_honor where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.StuAbnormalMapper">
+    
+    <resultMap type="StuAbnormal" id="AbnormalResult">
+        <result property="id"    column="id"    />
+        <result property="stuid"    column="stuid"    />
+        <result property="name"    column="name"    />
+        <result property="abnormalInformation"    column="abnormal_information"    />
+        <result property="abnormalPsychology"    column="abnormal_psychology"    />
+    </resultMap>
+	
+	<sql id="selectAbnormalVo">
+        select id, stuid, name, abnormal_information, abnormal_psychology from stu_abnormal
+    </sql>
+	
+    <select id="selectAbnormalList" parameterType="StuAbnormal" resultMap="AbnormalResult">
+        <include refid="selectAbnormalVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="stuid != null "> and stuid = #{stuid}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="abnormalInformation != null  and abnormalInformation != '' "> and abnormal_information = #{abnormalInformation}</if>
+             <if test="abnormalPsychology != null  and abnormalPsychology != '' "> and abnormal_psychology = #{abnormalPsychology}</if>
+         </where>
+    </select>
+    
+    <select id="selectAbnormalById" parameterType="Integer" resultMap="AbnormalResult">
+        <include refid="selectAbnormalVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAbnormal" parameterType="StuAbnormal">
+        insert into stu_abnormal
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="stuid != null  ">stuid,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="abnormalInformation != null  and abnormalInformation != ''  ">abnormal_information,</if>
+			<if test="abnormalPsychology != null  and abnormalPsychology != ''  ">abnormal_psychology,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="stuid != null  ">#{stuid},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="abnormalInformation != null  and abnormalInformation != ''  ">#{abnormalInformation},</if>
+			<if test="abnormalPsychology != null  and abnormalPsychology != ''  ">#{abnormalPsychology},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateAbnormal" parameterType="StuAbnormal">
+        update stu_abnormal
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stuid != null  ">stuid = #{stuid},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="abnormalInformation != null  and abnormalInformation != ''  ">abnormal_information = #{abnormalInformation},</if>
+            <if test="abnormalPsychology != null  and abnormalPsychology != ''  ">abnormal_psychology = #{abnormalPsychology},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteAbnormalById" parameterType="Integer">
+        delete from stu_abnormal where id = #{id}
+    </delete>
+	
+    <delete id="deleteAbnormalByIds" parameterType="String">
+        delete from stu_abnormal where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

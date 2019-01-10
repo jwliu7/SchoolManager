@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+
+    <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+				<form id="role-form">
+					<div class="select-list">
+						<ul>
+							<li>
+								学号：<input type="text" name="stuid"/>
+							</li>
+							<li>
+								姓名：<input type="text" name="name"/>
+							</li>
+							<li>
+								性别：<input type="text" name="sex"/>
+							</li>
+							<li>
+								专业：<input type="text" name="professional"/>
+							</li>
+							<li>
+								留学国家：<input type="text" name="stuAbroadCountries"/>
+							</li>
+							<li>
+								留学地点：<input type="text" name="destinations"/>
+							</li>
+							<li>
+								留学类型：<input type="text" name="studyingType"/>
+							</li>
+
+							<li>
+								<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i
+										class="fa fa-search"></i>&nbsp;搜索</a>
+								<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i
+										class="fa fa-refresh"></i>&nbsp;重置</a>
+							</li>
+						</ul>
+					</div>
+				</form>
+			</div>
+
+			<div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+				<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="student:abroad:add">
+					<i class="fa fa-plus"></i> 添加
+				</a>
+				<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()"
+				   shiro:hasPermission="student:abroad:edit">
+					<i class="fa fa-edit"></i> 修改
+				</a>
+				<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()"
+				   shiro:hasPermission="student:abroad:remove">
+					<i class="fa fa-remove"></i> 删除
+				</a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="student:abroad:input">
+					<i class="fa fa-upload"></i> 导入
+				</a>
+				<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="student:abroad:export">
+					<i class="fa fa-download"></i> 导出
+				</a>
+			</div>
+
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+    </div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('student:abroad:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('student:abroad:remove')}]];
+        var datas = [[${@dict.getType('sys_sex')}]];
+        var prefix = ctx + "student/abroad";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                inputUrl: prefix + "/input",
+                exportUrl: prefix + "/export",
+                modalName: "出国留学生",
+                search: false,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'id', 
+					title : '序号'
+				},
+				{
+					field : 'stuid', 
+					title : '学号' 
+				},
+				{
+					field : 'name', 
+					title : '学生姓名' 
+				},
+				{
+					field : 'sex',
+                    title : '性别',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
+				},
+				{
+					field : 'age', 
+					title : '年龄' 
+				},
+				{
+					field : 'phone', 
+					title : '联系电话' 
+				},
+				{
+					field : 'professional', 
+					title : '专业' 
+				},
+				{
+					field : 'stuAbroadCountries', 
+					title : '留学国家' 
+				},
+				{
+					field : 'stuTime', 
+					title : '留学时间' 
+				},
+				{
+					field : 'destinations', 
+					title : '留学地点' 
+				},
+				{
+					field : 'studyingType', 
+					title : '留学类型' 
+				},
+				{
+					field : 'typeConversion', 
+					title : '类型转换' 
+				},
+				{
+					field : 'rulesInformation', 
+					title : '校纪信息' 
+				},
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

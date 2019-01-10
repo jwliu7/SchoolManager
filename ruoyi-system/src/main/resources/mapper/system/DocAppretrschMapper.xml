@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.DocAppretrschMapper">
+    
+    <resultMap type="DocAppretrsch" id="AppretrschResult">
+        <result property="id"    column="id"    />
+        <result property="filename"    column="filename"    />
+        <result property="nowname"    column="nowname"    />
+        <result property="savepath"    column="savepath"    />
+        <result property="url"    column="url"    />
+        <result property="filetype"    column="filetype"    />
+        <result property="filesize"    column="filesize"    />
+        <result property="addtime"    column="addtime"    />
+    </resultMap>
+	
+	<sql id="selectAppretrschVo">
+        select id, filename, nowname, savepath, url, filetype, filesize, addtime from doc_appretrsch
+    </sql>
+	
+    <select id="selectAppretrschList" parameterType="DocAppretrsch" resultMap="AppretrschResult">
+        <include refid="selectAppretrschVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="filename != null  and filename != '' "> and filename = #{filename}</if>
+             <if test="nowname != null  and nowname != '' "> and nowname = #{nowname}</if>
+             <if test="savepath != null  and savepath != '' "> and savepath = #{savepath}</if>
+             <if test="url != null  and url != '' "> and url = #{url}</if>
+             <if test="filetype != null  and filetype != '' "> and filetype = #{filetype}</if>
+             <if test="filesize != null "> and filesize = #{filesize}</if>
+             <if test="addtime != null "> and addtime = #{addtime}</if>
+         </where>
+    </select>
+    
+    <select id="selectAppretrschById" parameterType="Integer" resultMap="AppretrschResult">
+        <include refid="selectAppretrschVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAppretrsch" parameterType="DocAppretrsch">
+        insert into doc_appretrsch
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="filename != null  and filename != ''  ">filename,</if>
+			<if test="nowname != null  and nowname != ''  ">nowname,</if>
+			<if test="savepath != null  and savepath != ''  ">savepath,</if>
+			<if test="url != null  and url != ''  ">url,</if>
+			<if test="filetype != null  and filetype != ''  ">filetype,</if>
+			<if test="filesize != null  ">filesize,</if>
+			addtime
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="filename != null  and filename != ''  ">#{filename},</if>
+			<if test="nowname != null  and nowname != ''  ">#{nowname},</if>
+			<if test="savepath != null  and savepath != ''  ">#{savepath},</if>
+			<if test="url != null  and url != ''  ">#{url},</if>
+			<if test="filetype != null  and filetype != ''  ">#{filetype},</if>
+			<if test="filesize != null  ">#{filesize},</if>
+			now()
+         </trim>
+    </insert>
+	 
+    <update id="updateAppretrsch" parameterType="DocAppretrsch">
+        update doc_appretrsch
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="filename != null  and filename != ''  ">filename = #{filename},</if>
+            <if test="nowname != null  and nowname != ''  ">nowname = #{nowname},</if>
+            <if test="savepath != null  and savepath != ''  ">savepath = #{savepath},</if>
+            <if test="url != null  and url != ''  ">url = #{url},</if>
+            <if test="filetype != null  and filetype != ''  ">filetype = #{filetype},</if>
+            <if test="filesize != null  ">filesize = #{filesize},</if>
+            <if test="addtime != null  ">addtime = #{addtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteAppretrschById" parameterType="Integer">
+        delete from doc_appretrsch where id = #{id}
+    </delete>
+	
+    <delete id="deleteAppretrschByIds" parameterType="String">
+        delete from doc_appretrsch where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

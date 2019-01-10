@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.DocActivityMapper">
+    
+    <resultMap type="DocActivity" id="ActivityResult">
+        <result property="id"    column="id"    />
+        <result property="filename"    column="filename"    />
+        <result property="nowname"    column="nowname"    />
+        <result property="savepath"    column="savepath"    />
+        <result property="url"    column="url"    />
+        <result property="filetype"    column="filetype"    />
+        <result property="filesize"    column="filesize"    />
+        <result property="addtime"    column="addtime"    />
+    </resultMap>
+	
+	<sql id="selectActivityVo">
+        select id, filename, nowname, savepath, url, filetype, filesize, addtime from doc_activity
+    </sql>
+	
+    <select id="selectActivityList" parameterType="DocActivity" resultMap="ActivityResult">
+        <include refid="selectActivityVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="filename != null  and filename != '' "> and filename = #{filename}</if>
+             <if test="nowname != null  and nowname != '' "> and nowname = #{nowname}</if>
+             <if test="savepath != null  and savepath != '' "> and savepath = #{savepath}</if>
+             <if test="url != null  and url != '' "> and url = #{url}</if>
+             <if test="filetype != null  and filetype != '' "> and filetype = #{filetype}</if>
+             <if test="filesize != null "> and filesize = #{filesize}</if>
+             <if test="addtime != null "> and addtime = #{addtime}</if>
+         </where>
+    </select>
+    
+    <select id="selectActivityById" parameterType="Integer" resultMap="ActivityResult">
+        <include refid="selectActivityVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertActivity" parameterType="DocActivity">
+        insert into doc_activity
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="filename != null  and filename != ''  ">filename,</if>
+			<if test="nowname != null  and nowname != ''  ">nowname,</if>
+			<if test="savepath != null  and savepath != ''  ">savepath,</if>
+			<if test="url != null  and url != ''  ">url,</if>
+			<if test="filetype != null  and filetype != ''  ">filetype,</if>
+			<if test="filesize != null  ">filesize,</if>
+			addtime
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="filename != null  and filename != ''  ">#{filename},</if>
+			<if test="nowname != null  and nowname != ''  ">#{nowname},</if>
+			<if test="savepath != null  and savepath != ''  ">#{savepath},</if>
+			<if test="url != null  and url != ''  ">#{url},</if>
+			<if test="filetype != null  and filetype != ''  ">#{filetype},</if>
+			<if test="filesize != null  ">#{filesize},</if>
+			now()
+         </trim>
+    </insert>
+	 
+    <update id="updateActivity" parameterType="DocActivity">
+        update doc_activity
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="filename != null  and filename != ''  ">filename = #{filename},</if>
+            <if test="nowname != null  and nowname != ''  ">nowname = #{nowname},</if>
+            <if test="savepath != null  and savepath != ''  ">savepath = #{savepath},</if>
+            <if test="url != null  and url != ''  ">url = #{url},</if>
+            <if test="filetype != null  and filetype != ''  ">filetype = #{filetype},</if>
+            <if test="filesize != null  ">filesize = #{filesize},</if>
+            <if test="addtime != null  ">addtime = #{addtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteActivityById" parameterType="Integer">
+        delete from doc_activity where id = #{id}
+    </delete>
+	
+    <delete id="deleteActivityByIds" parameterType="String">
+        delete from doc_activity where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

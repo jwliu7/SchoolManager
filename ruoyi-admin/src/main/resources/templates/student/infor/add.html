@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-infor-add">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">学号：</label>
+				<div class="col-sm-8">
+					<input id="stuid" name="stuid" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">学生姓名：</label>
+				<div class="col-sm-8">
+					<input id="name" name="name" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">年龄：</label>
+				<div class="col-sm-8">
+					<input id="age" name="age" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">性别：</label>
+				<div class="col-sm-8">
+					<select id="sex" name="sex" class="form-control m-b" th:with="type=${@dict.getType('sys_sex')}">
+						<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">所属院系：</label>
+				<div class="col-sm-8">
+					<input id="department" name="department" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">专业：</label>
+				<div class="col-sm-8">
+					<input id="professional" name="professional" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">年级：</label>
+				<div class="col-sm-8">
+					<input id="grade" name="grade" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">班级：</label>
+				<div class="col-sm-8">
+					<input id="stuClass" name="stuClass" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">宿舍：</label>
+				<div class="col-sm-8">
+					<input id="dormitory" name="dormitory" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">民族：</label>
+				<div class="col-sm-8">
+					<input id="national" name="national" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">籍贯：</label>
+				<div class="col-sm-8">
+					<input id="nativePlace" name="nativePlace" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">政治面貌：</label>
+				<div class="col-sm-8">
+					<input id="political" name="political" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">联系方式：</label>
+				<div class="col-sm-8">
+					<input id="contact" name="contact" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">出生日期：</label>
+				<div class="col-sm-8">
+					<input id="birthday" name="birthday" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">家庭住址：</label>
+				<div class="col-sm-8">
+					<input id="address" name="address" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">家庭联系电话：</label>
+				<div class="col-sm-8">
+					<input id="phone" name="phone" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">是否贫困生：</label>
+				<div class="col-sm-8">
+					<select id="stuPoor" name="stuPoor" class="form-control m-b" th:with="type=${@dict.getType('stu_poor')}">
+						<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+					</select>
+				</div>
+			</div>
+		</form>
+	</div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "student/infor"
+		$("#form-infor-add").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+
+        $(function() {
+            //初始化日期选择器
+            layui.use('laydate', function() {
+                var laydate = layui.laydate;
+                laydate.render({
+                    elem: '#birthday', //指定元素
+                    trigger: 'click'
+                });
+            });
+
+        });
+
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/add", $('#form-infor-add').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

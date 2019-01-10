@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+<div class="wrapper wrapper-content animated fadeInRight ibox-content">
+    <form class="form-horizontal m" id="form-multimedia-edit" th:object="${multimedia}">
+        <input id="id" name="id" th:field="*{id}" type="hidden">
+        <div class="form-group">
+            <label class="col-sm-3 control-label">教室：</label>
+            <div class="col-sm-8">
+                <input id="classroom" name="classroom" th:field="*{classroom}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">使用情况：</label>
+            <div class="col-sm-8">
+                <select id="state" name="state" class="form-control m-b" th:with="type=${@dict.getType('sys_classrom')}">
+                    <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{state}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">预约人：</label>
+            <div class="col-sm-8">
+                <input id="appPeople" name="appPeople" th:field="*{appPeople}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">预约时间：</label>
+            <div class="col-sm-8">
+                <input id="appTime" name="appTime" th:field="*{appTime}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">使用人：</label>
+            <div class="col-sm-8">
+                <input id="user" name="user" th:field="*{user}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">开始时间：</label>
+            <div class="col-sm-8">
+                <input id="startTime" name="startTime" th:field="*{startTime}" class="form-control" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-3 control-label">结束时间：</label>
+            <div class="col-sm-8">
+                <input id="endTime" name="endTime" th:field="*{endTime}" class="form-control" type="text">
+            </div>
+        </div>
+    </form>
+</div>
+<div th:include="include::footer"></div>
+<script type="text/javascript">
+    var prefix = ctx + "classrom/multimedia"
+    $("#form-multimedia-edit").validate({
+        rules: {
+            xxxx: {
+                required: true,
+            },
+        }
+    });
+
+    function submitHandler() {
+        if ($.validate.form()) {
+            $.operate.save(prefix + "/edit", $('#form-multimedia-edit').serialize());
+        }
+    }
+</script>
+</body>
+</html>

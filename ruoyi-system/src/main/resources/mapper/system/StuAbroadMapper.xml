@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.StuAbroadMapper">
+    
+    <resultMap type="StuAbroad" id="AbroadResult">
+        <result property="id"    column="id"    />
+        <result property="stuid"    column="stuid"    />
+        <result property="name"    column="name"    />
+        <result property="sex"    column="sex"    />
+        <result property="age"    column="age"    />
+        <result property="phone"    column="phone"    />
+        <result property="professional"    column="professional"    />
+        <result property="stuAbroadCountries"    column="stu_abroad_countries"    />
+        <result property="stuTime"    column="stu_time"    />
+        <result property="destinations"    column="destinations"    />
+        <result property="studyingType"    column="studying_type"    />
+        <result property="typeConversion"    column="type_conversion"    />
+        <result property="rulesInformation"    column="rules_information"    />
+    </resultMap>
+	
+	<sql id="selectAbroadVo">
+        select id, stuid, name, sex, age, phone, professional, stu_abroad_countries, stu_time, destinations, studying_type, type_conversion, rules_information from stu_abroad
+    </sql>
+	
+    <select id="selectAbroadList" parameterType="StuAbroad" resultMap="AbroadResult">
+        <include refid="selectAbroadVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="stuid != null "> and stuid = #{stuid}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="sex != null "> and sex = #{sex}</if>
+             <if test="age != null "> and age = #{age}</if>
+             <if test="phone != null  and phone != '' "> and phone = #{phone}</if>
+             <if test="professional != null  and professional != '' "> and professional = #{professional}</if>
+             <if test="stuAbroadCountries != null  and stuAbroadCountries != '' "> and stu_abroad_countries = #{stuAbroadCountries}</if>
+             <if test="stuTime != null "> and stu_time = #{stuTime}</if>
+             <if test="destinations != null  and destinations != '' "> and destinations = #{destinations}</if>
+             <if test="studyingType != null  and studyingType != '' "> and studying_type = #{studyingType}</if>
+             <if test="typeConversion != null  and typeConversion != '' "> and type_conversion = #{typeConversion}</if>
+             <if test="rulesInformation != null  and rulesInformation != '' "> and rules_information = #{rulesInformation}</if>
+         </where>
+    </select>
+    
+    <select id="selectAbroadById" parameterType="Integer" resultMap="AbroadResult">
+        <include refid="selectAbroadVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAbroad" parameterType="StuAbroad">
+        insert into stu_abroad
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="stuid != null  ">stuid,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="sex != null  ">sex,</if>
+			<if test="age != null  ">age,</if>
+			<if test="phone != null  and phone != ''  ">phone,</if>
+			<if test="professional != null  and professional != ''  ">professional,</if>
+			<if test="stuAbroadCountries != null  and stuAbroadCountries != ''  ">stu_abroad_countries,</if>
+			<if test="stuTime != null  ">stu_time,</if>
+			<if test="destinations != null  and destinations != ''  ">destinations,</if>
+			<if test="studyingType != null  and studyingType != ''  ">studying_type,</if>
+			<if test="typeConversion != null  and typeConversion != ''  ">type_conversion,</if>
+			<if test="rulesInformation != null  and rulesInformation != ''  ">rules_information,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="stuid != null  ">#{stuid},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="sex != null  ">#{sex},</if>
+			<if test="age != null  ">#{age},</if>
+			<if test="phone != null  and phone != ''  ">#{phone},</if>
+			<if test="professional != null  and professional != ''  ">#{professional},</if>
+			<if test="stuAbroadCountries != null  and stuAbroadCountries != ''  ">#{stuAbroadCountries},</if>
+			<if test="stuTime != null  ">#{stuTime},</if>
+			<if test="destinations != null  and destinations != ''  ">#{destinations},</if>
+			<if test="studyingType != null  and studyingType != ''  ">#{studyingType},</if>
+			<if test="typeConversion != null  and typeConversion != ''  ">#{typeConversion},</if>
+			<if test="rulesInformation != null  and rulesInformation != ''  ">#{rulesInformation},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateAbroad" parameterType="StuAbroad">
+        update stu_abroad
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stuid != null  ">stuid = #{stuid},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="sex != null  ">sex = #{sex},</if>
+            <if test="age != null  ">age = #{age},</if>
+            <if test="phone != null  and phone != ''  ">phone = #{phone},</if>
+            <if test="professional != null  and professional != ''  ">professional = #{professional},</if>
+            <if test="stuAbroadCountries != null  and stuAbroadCountries != ''  ">stu_abroad_countries = #{stuAbroadCountries},</if>
+            <if test="stuTime != null  ">stu_time = #{stuTime},</if>
+            <if test="destinations != null  and destinations != ''  ">destinations = #{destinations},</if>
+            <if test="studyingType != null  and studyingType != ''  ">studying_type = #{studyingType},</if>
+            <if test="typeConversion != null  and typeConversion != ''  ">type_conversion = #{typeConversion},</if>
+            <if test="rulesInformation != null  and rulesInformation != ''  ">rules_information = #{rulesInformation},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteAbroadById" parameterType="Integer">
+        delete from stu_abroad where id = #{id}
+    </delete>
+	
+    <delete id="deleteAbroadByIds" parameterType="String">
+        delete from stu_abroad where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

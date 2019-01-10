@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="gray-bg">
+    <div class="container-div">
+		<div class="row">
+			<div class="col-sm-12 search-collapse">
+			<form id="role-form">
+				<div class="select-list">
+					<ul>
+						<li>
+							工号：<input type="text" name="teaid"/>
+						</li>
+						<li>
+							姓名：<input type="text" name="name"/>
+						</li>
+						<li>
+							职称：<input type="text" name="title"/>
+						</li>
+						<li>
+							职务：<input type="text" name="istrativeDuties"/>
+						</li>
+						<li>
+							所教学科：<input type="text" name="taughtSubjects"/>
+						</li>
+
+						<li>
+							<a class="btn btn-primary btn-rounded btn-sm" onclick="$.table.search()"><i class="fa fa-search"></i>&nbsp;搜索</a>
+							<a class="btn btn-warning btn-rounded btn-sm" onclick="$.form.reset()"><i class="fa fa-refresh"></i>&nbsp;重置</a>
+						</li>
+					</ul>
+				</div>
+			</form>
+		</div>
+
+			<div class="btn-group-sm hidden-xs" id="toolbar" role="group">
+			<a class="btn btn-success" onclick="$.operate.add()" shiro:hasPermission="teacher:foreign:add">
+				<i class="fa fa-plus"></i> 添加
+			</a>
+			<a class="btn btn-primary btn-edit disabled" onclick="$.operate.edit()" shiro:hasPermission="teacher:foreign:edit">
+	            <i class="fa fa-edit"></i> 修改
+	        </a>
+			<a class="btn btn-danger btn-del btn-del disabled" onclick="$.operate.removeAll()" shiro:hasPermission="teacher:foreign:remove">
+				<i class="fa fa-remove"></i> 删除
+			</a>
+			<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="teacher:foreign:input">
+				<i class="fa fa-upload"></i> 导入
+			</a>
+			<a class="btn btn-warning" onclick="$.table.exportExcel()" shiro:hasPermission="teacher:foreign:export">
+				<i class="fa fa-download"></i> 导出
+			</a>
+		</div>
+			
+			<div class="col-sm-12 select-table table-striped">
+				<table id="bootstrap-table" data-mobile-responsive="true"></table>
+			</div>
+		</div>
+    </div>
+    <div th:include="include :: footer"></div>
+    <script th:inline="javascript">
+        var editFlag = [[${@permission.hasPermi('teacher:foreign:edit')}]];
+        var removeFlag = [[${@permission.hasPermi('teacher:foreign:remove')}]];
+        var datas = [[${@dict.getType('sys_sex')}]];
+        var prefix = ctx + "teacher/foreign";
+
+        $(function() {
+            var options = {
+                url: prefix + "/list",
+                createUrl: prefix + "/add",
+                updateUrl: prefix + "/edit/{id}",
+                removeUrl: prefix + "/remove",
+                inputUrl: prefix + "/input",
+                exportUrl: prefix + "/export",
+                modalName: "外教基本",
+                search: false,
+                columns: [{
+		            checkbox: true
+		        },
+				{
+					field : 'id', 
+					title : '序号'
+				},
+				{
+					field : 'teaid', 
+					title : '工号' 
+				},
+				{
+					field : 'name', 
+					title : '外教姓名' 
+				},
+				{
+					field : 'sex', 
+					title : '性别',
+                    formatter: function(value, row, index) {
+                        return $.table.selectDictLabel(datas, value);
+                    }
+				},
+				{
+					field : 'age', 
+					title : '年龄' 
+				},
+				{
+					field : 'birthday', 
+					title : '出生日期' 
+				},
+				{
+					field : 'nationality', 
+					title : '国籍' 
+				},
+				{
+					field : 'department', 
+					title : '所属系部' 
+				},
+				{
+					field : 'discipline', 
+					title : '学科方向' 
+				},
+				{
+					field : 'record', 
+					title : '学历' 
+				},
+				{
+					field : 'gradTime', 
+					title : '毕业时间' 
+				},
+				{
+					field : 'gradSchool', 
+					title : '毕业学院' 
+				},
+				{
+					field : 'gradProfe', 
+					title : '毕业专业' 
+				},
+				{
+					field : 'degree', 
+					title : '学位' 
+				},
+				{
+					field : 'degreeTime', 
+					title : '学位获得时间' 
+				},
+				{
+					field : 'title', 
+					title : '职称' 
+				},
+				{
+					field : 'titleTime', 
+					title : '职称确认时间' 
+				},
+				{
+					field : 'istrativeDuties', 
+					title : '行政职务' 
+				},
+				{
+					field : 'employmentTime', 
+					title : '任职时间' 
+				},
+				{
+					field : 'fortype', 
+					title : '任职类型' 
+				},
+				{
+					field : 'taughtSubjects', 
+					title : '所教学科' 
+				},
+				{
+					field : 'classTime', 
+					title : '课时' 
+				},
+		        {
+		            title: '操作',
+		            align: 'center',
+		            formatter: function(value, row, index) {
+		            	var actions = [];
+		            	actions.push('<a class="btn btn-success btn-xs ' + editFlag + '" href="#" onclick="$.operate.edit(\'' + row.id + '\')"><i class="fa fa-edit"></i>编辑</a> ');
+                        actions.push('<a class="btn btn-danger btn-xs ' + removeFlag + '" href="#" onclick="$.operate.remove(\'' + row.id + '\')"><i class="fa fa-remove"></i>删除</a>');
+						return actions.join('');
+		            }
+		        }]
+            };
+            $.table.init(options);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-foreign-add">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">工号：</label>
+				<div class="col-sm-8">
+					<input id="teaid" name="teaid" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">外教姓名：</label>
+				<div class="col-sm-8">
+					<input id="name" name="name" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">性别：</label>
+				<div class="col-sm-8">
+					<select id="sex" name="sex" class="form-control m-b" th:with="type=${@dict.getType('sys_sex')}">
+						<option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}"></option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">年龄：</label>
+				<div class="col-sm-8">
+					<input id="age" name="age" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">出生日期：</label>
+				<div class="col-sm-8">
+					<input id="birthday" name="birthday" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">国籍：</label>
+				<div class="col-sm-8">
+					<input id="nationality" name="nationality" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">所属系部：</label>
+				<div class="col-sm-8">
+					<input id="department" name="department" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">学科方向：</label>
+				<div class="col-sm-8">
+					<input id="discipline" name="discipline" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">学历：</label>
+				<div class="col-sm-8">
+					<input id="record" name="record" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">毕业时间：</label>
+				<div class="col-sm-8">
+					<input id="gradTime" name="gradTime" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">毕业学院：</label>
+				<div class="col-sm-8">
+					<input id="gradSchool" name="gradSchool" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">毕业专业：</label>
+				<div class="col-sm-8">
+					<input id="gradProfe" name="gradProfe" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">学位：</label>
+				<div class="col-sm-8">
+					<input id="degree" name="degree" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">学位获得时间：</label>
+				<div class="col-sm-8">
+					<input id="degreeTime" name="degreeTime" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">职称：</label>
+				<div class="col-sm-8">
+					<input id="title" name="title" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">职称确认时间：</label>
+				<div class="col-sm-8">
+					<input id="titleTime" name="titleTime" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">行政职务：</label>
+				<div class="col-sm-8">
+					<input id="istrativeDuties" name="istrativeDuties" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">任职时间：</label>
+				<div class="col-sm-8">
+					<input id="employmentTime" name="employmentTime" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">任职类型：</label>
+				<div class="col-sm-8">
+					<input id="fortype" name="fortype" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">所教学科：</label>
+				<div class="col-sm-8">
+					<input id="taughtSubjects" name="taughtSubjects" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">课时：</label>
+				<div class="col-sm-8">
+					<input id="classTime" name="classTime" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+	</div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "teacher/foreign"
+		$("#form-foreign-add").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+
+        $(function() {
+            //初始化日期选择器
+            layui.use('laydate', function() {
+                var laydate = layui.laydate;
+                laydate.render({
+                    elem: '#birthday', //指定元素
+                    trigger: 'click'
+                });
+                laydate.render({
+                    elem: '#gradTime', //指定元素
+                    trigger: 'click'
+                });
+                laydate.render({
+                    elem: '#degreeTime', //指定元素
+                    trigger: 'click'
+                });
+                laydate.render({
+                    elem: '#titleTime', //指定元素
+                    trigger: 'click'
+                });
+                laydate.render({
+                    elem: '#employmentTime', //指定元素
+                    trigger: 'click'
+                });
+            });
+
+        });
+
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/add", $('#form-foreign-add').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

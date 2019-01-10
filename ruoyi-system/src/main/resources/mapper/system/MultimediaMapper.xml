@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.MultimediaMapper">
+    
+    <resultMap type="Multimedia" id="MultimediaResult">
+        <result property="id"    column="id"    />
+        <result property="classroom"    column="classroom"    />
+        <result property="state"    column="state"    />
+        <result property="appPeople"    column="app_people"    />
+        <result property="appTime"    column="app_time"    />
+        <result property="user"    column="user"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+    </resultMap>
+	
+	<sql id="selectMultimediaVo">
+        select id, classroom, state, app_people, app_time, user, start_time, end_time from rom_multimedia
+    </sql>
+	
+    <select id="selectMultimediaList" parameterType="Multimedia" resultMap="MultimediaResult">
+        <include refid="selectMultimediaVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="classroom != null  and classroom != '' "> and classroom = #{classroom}</if>
+             <if test="state != null  and state != '' "> and state = #{state}</if>
+             <if test="appPeople != null  and appPeople != '' "> and app_people = #{appPeople}</if>
+             <if test="appTime != null "> and app_time = #{appTime}</if>
+             <if test="user != null  and user != '' "> and user = #{user}</if>
+             <if test="startTime != null "> and start_time = #{startTime}</if>
+             <if test="endTime != null "> and end_time = #{endTime}</if>
+         </where>
+    </select>
+    
+    <select id="selectMultimediaById" parameterType="Integer" resultMap="MultimediaResult">
+        <include refid="selectMultimediaVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertMultimedia" parameterType="Multimedia">
+        insert into rom_multimedia
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="classroom != null  and classroom != ''  ">classroom,</if>
+			<if test="state != null  and state != ''  ">state,</if>
+			<if test="appPeople != null  and appPeople != ''  ">app_people,</if>
+			<if test="appTime != null  ">app_time,</if>
+			<if test="user != null  and user != ''  ">user,</if>
+			<if test="startTime != null  ">start_time,</if>
+			<if test="endTime != null  ">end_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="classroom != null  and classroom != ''  ">#{classroom},</if>
+			<if test="state != null  and state != ''  ">#{state},</if>
+			<if test="appPeople != null  and appPeople != ''  ">#{appPeople},</if>
+			<if test="appTime != null  ">#{appTime},</if>
+			<if test="user != null  and user != ''  ">#{user},</if>
+			<if test="startTime != null  ">#{startTime},</if>
+			<if test="endTime != null  ">#{endTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateMultimedia" parameterType="Multimedia">
+        update rom_multimedia
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="classroom != null  and classroom != ''  ">classroom = #{classroom},</if>
+            <if test="state != null  and state != ''  ">state = #{state},</if>
+            <if test="appPeople != null  and appPeople != ''  ">app_people = #{appPeople},</if>
+            <if test="appTime != null  ">app_time = #{appTime},</if>
+            <if test="user != null  and user != ''  ">user = #{user},</if>
+            <if test="startTime != null  ">start_time = #{startTime},</if>
+            <if test="endTime != null  ">end_time = #{endTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteMultimediaById" parameterType="Integer">
+        delete from rom_multimedia where id = #{id}
+    </delete>
+	
+    <delete id="deleteMultimediaByIds" parameterType="String">
+        delete from rom_multimedia where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

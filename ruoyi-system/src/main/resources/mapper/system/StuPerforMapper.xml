@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.StuPerforMapper">
+    
+    <resultMap type="StuPerfor" id="PerforResult">
+        <result property="id"    column="id"    />
+        <result property="stuid"    column="stuid"    />
+        <result property="name"    column="name"    />
+        <result property="activities"    column="activities"    />
+        <result property="honor"    column="honor"    />
+        <result property="monographs"    column="monographs"    />
+        <result property="achievement"    column="achievement"    />
+        <result property="projectinvo"    column="projectinvo"    />
+        <result property="violation"    column="violation"    />
+        <result property="cadres"    column="cadres"    />
+    </resultMap>
+	
+	<sql id="selectPerforVo">
+        select id, stuid, name, activities, honor, monographs, achievement, projectinvo, violation, cadres from stu_perfor
+    </sql>
+	
+    <select id="selectPerforList" parameterType="StuPerfor" resultMap="PerforResult">
+        <include refid="selectPerforVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="stuid != null "> and stuid = #{stuid}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="activities != null  and activities != '' "> and activities = #{activities}</if>
+             <if test="honor != null  and honor != '' "> and honor = #{honor}</if>
+             <if test="monographs != null  and monographs != '' "> and monographs = #{monographs}</if>
+             <if test="achievement != null  and achievement != '' "> and achievement = #{achievement}</if>
+             <if test="projectinvo != null  and projectinvo != '' "> and projectinvo = #{projectinvo}</if>
+             <if test="violation != null  and violation != '' "> and violation = #{violation}</if>
+             <if test="cadres != null  and cadres != '' "> and cadres = #{cadres}</if>
+         </where>
+    </select>
+    
+    <select id="selectPerforById" parameterType="Integer" resultMap="PerforResult">
+        <include refid="selectPerforVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertPerfor" parameterType="StuPerfor">
+        insert into stu_perfor
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="stuid != null  ">stuid,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="activities != null  and activities != ''  ">activities,</if>
+			<if test="honor != null  and honor != ''  ">honor,</if>
+			<if test="monographs != null  and monographs != ''  ">monographs,</if>
+			<if test="achievement != null  and achievement != ''  ">achievement,</if>
+			<if test="projectinvo != null  and projectinvo != ''  ">projectinvo,</if>
+			<if test="violation != null  and violation != ''  ">violation,</if>
+			<if test="cadres != null  and cadres != ''  ">cadres,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="stuid != null  ">#{stuid},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="activities != null  and activities != ''  ">#{activities},</if>
+			<if test="honor != null  and honor != ''  ">#{honor},</if>
+			<if test="monographs != null  and monographs != ''  ">#{monographs},</if>
+			<if test="achievement != null  and achievement != ''  ">#{achievement},</if>
+			<if test="projectinvo != null  and projectinvo != ''  ">#{projectinvo},</if>
+			<if test="violation != null  and violation != ''  ">#{violation},</if>
+			<if test="cadres != null  and cadres != ''  ">#{cadres},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updatePerfor" parameterType="StuPerfor">
+        update stu_perfor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stuid != null  ">stuid = #{stuid},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="activities != null  and activities != ''  ">activities = #{activities},</if>
+            <if test="honor != null  and honor != ''  ">honor = #{honor},</if>
+            <if test="monographs != null  and monographs != ''  ">monographs = #{monographs},</if>
+            <if test="achievement != null  and achievement != ''  ">achievement = #{achievement},</if>
+            <if test="projectinvo != null  and projectinvo != ''  ">projectinvo = #{projectinvo},</if>
+            <if test="violation != null  and violation != ''  ">violation = #{violation},</if>
+            <if test="cadres != null  and cadres != ''  ">cadres = #{cadres},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deletePerforById" parameterType="Integer">
+        delete from stu_perfor where id = #{id}
+    </delete>
+	
+    <delete id="deletePerforByIds" parameterType="String">
+        delete from stu_perfor where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

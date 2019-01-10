@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TeaInforMapper">
+
+    <resultMap type="TeaInfor" id="InforResult">
+        <result property="id"                 column="id"    />
+        <result property="teaid"              column="teaid"    />
+        <result property="name"               column="name"    />
+        <result property="sex"                column="sex"    />
+        <result property="age"                column="age"    />
+        <result property="birthday"           column="birthday"    />
+        <result property="national"           column="national"    />
+        <result property="place"              column="place"    />
+        <result property="department"         column="department"    />
+        <result property="discipline"         column="discipline"    />
+        <result property="political"          column="political"    />
+        <result property="record"             column="record"    />
+        <result property="gradTime"           column="grad_time"    />
+        <result property="gradSchool"         column="grad_school"    />
+        <result property="gradProfe"          column="grad_profe"    />
+        <result property="degree"             column="degree"    />
+        <result property="degreeTime"         column="degree_time"    />
+        <result property="title"              column="title"    />
+        <result property="titleTime"          column="title_time"    />
+        <result property="istrativeDuties"    column="istrative_duties"    />
+        <result property="employmentTime"     column="employment_time"    />
+        <result property="computerRank"       column="computer_rank"    />
+        <result property="englishLanguage"    column="english_language"    />
+        <result property="englishLevel"       column="english_level"    />
+        <result property="teachingCourses"    column="teaching_courses"    />
+        <result property="socialpart"         column="socialpart"    />
+        <result property="learntoserve"       column="learntoserve"    />
+    </resultMap>
+
+    <sql id="selectInforVo">
+        select id, teaid, name, sex, age, birthday, national, place, department, discipline, political, record, grad_time, grad_school,
+                grad_profe, degree, degree_time, title, title_time, istrative_duties, employment_time, computer_rank, english_language,
+                english_level, teaching_courses, socialpart, learntoserve
+        from tea_infor
+    </sql>
+
+    <select id="selectInforList" parameterType="TeaInfor" resultMap="InforResult">
+        <include refid="selectInforVo"/>
+        <where>
+            <if test="id != null "> and id = #{id}</if>
+             <if test="teaid != null "> and teaid = #{teaid}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="sex != null "> and sex = #{sex}</if>
+             <if test="age != null "> and age = #{age}</if>
+             <if test="birthday != null "> and birthday = #{birthday}</if>
+             <if test="national != null  and national != '' "> and national = #{national}</if>
+             <if test="place != null  and place != '' "> and place = #{place}</if>
+             <if test="department != null  and department != '' "> and department = #{department}</if>
+             <if test="discipline != null  and discipline != '' "> and discipline = #{discipline}</if>
+             <if test="political != null  and political != '' "> and political = #{political}</if>
+             <if test="record != null  and record != '' "> and record = #{record}</if>
+             <if test="gradTime != null "> and grad_time = #{gradTime}</if>
+             <if test="gradSchool != null  and gradSchool != '' "> and grad_school = #{gradSchool}</if>
+             <if test="gradProfe != null  and gradProfe != '' "> and grad_profe = #{gradProfe}</if>
+             <if test="degree != null  and degree != '' "> and degree = #{degree}</if>
+             <if test="degreeTime != null "> and degree_time = #{degreeTime}</if>
+             <if test="title != null  and title != '' "> and title = #{title}</if>
+             <if test="titleTime != null "> and title_time = #{titleTime}</if>
+             <if test="istrativeDuties != null  and istrativeDuties != '' "> and istrative_duties = #{istrativeDuties}</if>
+             <if test="employmentTime != null "> and employment_time = #{employmentTime}</if>
+             <if test="computerRank != null "> and computer_rank = #{computerRank}</if>
+             <if test="englishLanguage != null  and englishLanguage != '' "> and english_language = #{englishLanguage}</if>
+             <if test="englishLevel != null "> and english_level = #{englishLevel}</if>
+             <if test="teachingCourses != null  and teachingCourses != '' "> and teaching_courses = #{teachingCourses}</if>
+             <if test="socialpart != null  and socialpart != '' "> and socialpart = #{socialpart}</if>
+             <if test="learntoserve != null  and learntoserve != '' "> and learntoserve = #{learntoserve}</if>
+         </where>
+    </select>
+
+    <select id="selectInforById" parameterType="Integer" resultMap="InforResult">
+        <include refid="selectInforVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectInforByTeaId" parameterType="Integer" resultMap="InforResult">
+        <include refid="selectInforVo"/>
+        where teaid = #{teaid}
+    </select>
+
+    <insert id="insertInfor" parameterType="TeaInfor">
+        insert into tea_infor
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="teaid != null  ">teaid,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="sex != null and sex != ''">sex,</if>
+			<if test="age != null  ">age,</if>
+			<if test="birthday != null  ">birthday,</if>
+			<if test="national != null  and national != ''  ">national,</if>
+			<if test="place != null  and place != ''  ">place,</if>
+			<if test="department != null  and department != ''  ">department,</if>
+			<if test="discipline != null  and discipline != ''  ">discipline,</if>
+			<if test="political != null  and political != ''  ">political,</if>
+			<if test="record != null  and record != ''  ">record,</if>
+			<if test="gradTime != null  ">grad_time,</if>
+			<if test="gradSchool != null  and gradSchool != ''  ">grad_school,</if>
+			<if test="gradProfe != null  and gradProfe != ''  ">grad_profe,</if>
+			<if test="degree != null  and degree != ''  ">degree,</if>
+			<if test="degreeTime != null  ">degree_time,</if>
+			<if test="title != null  and title != ''  ">title,</if>
+			<if test="titleTime != null  ">title_time,</if>
+			<if test="istrativeDuties != null  and istrativeDuties != ''  ">istrative_duties,</if>
+			<if test="employmentTime != null  ">employment_time,</if>
+			<if test="computerRank != null  ">computer_rank,</if>
+			<if test="englishLanguage != null  and englishLanguage != ''  ">english_language,</if>
+			<if test="englishLevel != null  ">english_level,</if>
+			<if test="teachingCourses != null  and teachingCourses != ''  ">teaching_courses,</if>
+			<if test="socialpart != null  and socialpart != ''  ">socialpart,</if>
+			<if test="learntoserve != null  and learntoserve != ''  ">learntoserve,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="teaid != null  ">#{teaid},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="sex != null and sex != ''">#{sex},</if>
+			<if test="age != null  ">#{age},</if>
+			<if test="birthday != null  ">#{birthday},</if>
+			<if test="national != null  and national != ''  ">#{national},</if>
+			<if test="place != null  and place != ''  ">#{place},</if>
+			<if test="department != null  and department != ''  ">#{department},</if>
+			<if test="discipline != null  and discipline != ''  ">#{discipline},</if>
+			<if test="political != null  and political != ''  ">#{political},</if>
+			<if test="record != null  and record != ''  ">#{record},</if>
+			<if test="gradTime != null  ">#{gradTime},</if>
+			<if test="gradSchool != null  and gradSchool != ''  ">#{gradSchool},</if>
+			<if test="gradProfe != null  and gradProfe != ''  ">#{gradProfe},</if>
+			<if test="degree != null  and degree != ''  ">#{degree},</if>
+			<if test="degreeTime != null  ">#{degreeTime},</if>
+			<if test="title != null  and title != ''  ">#{title},</if>
+			<if test="titleTime != null  ">#{titleTime},</if>
+			<if test="istrativeDuties != null  and istrativeDuties != ''  ">#{istrativeDuties},</if>
+			<if test="employmentTime != null  ">#{employmentTime},</if>
+			<if test="computerRank != null  ">#{computerRank},</if>
+			<if test="englishLanguage != null  and englishLanguage != ''  ">#{englishLanguage},</if>
+			<if test="englishLevel != null  ">#{englishLevel},</if>
+			<if test="teachingCourses != null  and teachingCourses != ''  ">#{teachingCourses},</if>
+			<if test="socialpart != null  and socialpart != ''  ">#{socialpart},</if>
+			<if test="learntoserve != null  and learntoserve != ''  ">#{learntoserve},</if>
+         </trim>
+    </insert>
+
+    <update id="updateInfor" parameterType="TeaInfor">
+        update tea_infor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teaid != null  ">teaid = #{teaid},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="sex != null and sex != ''  ">sex = #{sex},</if>
+            <if test="age != null  ">age = #{age},</if>
+            <if test="birthday != null  ">birthday = #{birthday},</if>
+            <if test="national != null  and national != ''  ">national = #{national},</if>
+            <if test="place != null  and place != ''  ">place = #{place},</if>
+            <if test="department != null  and department != ''  ">department = #{department},</if>
+            <if test="discipline != null  and discipline != ''  ">discipline = #{discipline},</if>
+            <if test="political != null  and political != ''  ">political = #{political},</if>
+            <if test="record != null  and record != ''  ">record = #{record},</if>
+            <if test="gradTime != null  ">grad_time = #{gradTime},</if>
+            <if test="gradSchool != null  and gradSchool != ''  ">grad_school = #{gradSchool},</if>
+            <if test="gradProfe != null  and gradProfe != ''  ">grad_profe = #{gradProfe},</if>
+            <if test="degree != null  and degree != ''  ">degree = #{degree},</if>
+            <if test="degreeTime != null  ">degree_time = #{degreeTime},</if>
+            <if test="title != null  and title != ''  ">title = #{title},</if>
+            <if test="titleTime != null  ">title_time = #{titleTime},</if>
+            <if test="istrativeDuties != null  and istrativeDuties != ''  ">istrative_duties = #{istrativeDuties},</if>
+            <if test="employmentTime != null  ">employment_time = #{employmentTime},</if>
+            <if test="computerRank != null  ">computer_rank = #{computerRank},</if>
+            <if test="englishLanguage != null  and englishLanguage != ''  ">english_language = #{englishLanguage},</if>
+            <if test="englishLevel != null  ">english_level = #{englishLevel},</if>
+            <if test="teachingCourses != null  and teachingCourses != ''  ">teaching_courses = #{teachingCourses},</if>
+            <if test="socialpart != null  and socialpart != ''  ">socialpart = #{socialpart},</if>
+            <if test="learntoserve != null  and learntoserve != ''  ">learntoserve = #{learntoserve},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <update id="updateInforByTeaId" parameterType="TeaInfor">
+        update tea_infor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teaid != null  ">teaid = #{teaid},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="sex != null and sex != ''  ">sex = #{sex},</if>
+            <if test="age != null  ">age = #{age},</if>
+            <if test="birthday != null  ">birthday = #{birthday},</if>
+            <if test="national != null  and national != ''  ">national = #{national},</if>
+            <if test="place != null  and place != ''  ">place = #{place},</if>
+            <if test="department != null  and department != ''  ">department = #{department},</if>
+            <if test="discipline != null  and discipline != ''  ">discipline = #{discipline},</if>
+            <if test="political != null  and political != ''  ">political = #{political},</if>
+            <if test="record != null  and record != ''  ">record = #{record},</if>
+            <if test="gradTime != null  ">grad_time = #{gradTime},</if>
+            <if test="gradSchool != null  and gradSchool != ''  ">grad_school = #{gradSchool},</if>
+            <if test="gradProfe != null  and gradProfe != ''  ">grad_profe = #{gradProfe},</if>
+            <if test="degree != null  and degree != ''  ">degree = #{degree},</if>
+            <if test="degreeTime != null  ">degree_time = #{degreeTime},</if>
+            <if test="title != null  and title != ''  ">title = #{title},</if>
+            <if test="titleTime != null  ">title_time = #{titleTime},</if>
+            <if test="istrativeDuties != null  and istrativeDuties != ''  ">istrative_duties = #{istrativeDuties},</if>
+            <if test="employmentTime != null  ">employment_time = #{employmentTime},</if>
+            <if test="computerRank != null  ">computer_rank = #{computerRank},</if>
+            <if test="englishLanguage != null  and englishLanguage != ''  ">english_language = #{englishLanguage},</if>
+            <if test="englishLevel != null  ">english_level = #{englishLevel},</if>
+            <if test="teachingCourses != null  and teachingCourses != ''  ">teaching_courses = #{teachingCourses},</if>
+            <if test="socialpart != null  and socialpart != ''  ">socialpart = #{socialpart},</if>
+            <if test="learntoserve != null  and learntoserve != ''  ">learntoserve = #{learntoserve},</if>
+        </trim>
+        where teaid = #{teaid}
+    </update>
+
+	<delete id="deleteInforById" parameterType="Integer">
+        delete from tea_infor where id = #{id}
+    </delete>
+
+    <delete id="deleteInforByIds" parameterType="String">
+        delete from tea_infor where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

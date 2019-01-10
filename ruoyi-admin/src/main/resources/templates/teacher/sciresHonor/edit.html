@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-sciresHonor-edit" th:object="${sciresHonor}">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">工号：</label>
+                <div class="col-sm-8">
+                    <input id="teaid" name="teaid" th:field="*{teaid}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">教师姓名：</label>
+                <div class="col-sm-8">
+                    <input id="name" name="name" th:field="*{name}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">论文题目：</label>
+                <div class="col-sm-8">
+                    <input id="paperTopics" name="paperTopics" th:field="*{paperTopics}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">刊物名称：</label>
+                <div class="col-sm-8">
+                    <input id="publication" name="publication" th:field="*{publication}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">发表时间：</label>
+                <div class="col-sm-8">
+                    <input id="publishedTime" name="publishedTime" th:field="*{publishedTime}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">论文获奖情况：</label>
+                <div class="col-sm-8">
+                    <input id="awards" name="awards" th:field="*{awards}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">科研课题：</label>
+                <div class="col-sm-8">
+                    <input id="researchSubject" name="researchSubject" th:field="*{researchSubject}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">课题来源：</label>
+                <div class="col-sm-8">
+                    <input id="topicSource" name="topicSource" th:field="*{topicSource}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">科研项目名称：</label>
+                <div class="col-sm-8">
+                    <input id="researchProject" name="researchProject" th:field="*{researchProject}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">起止年份：</label>
+                <div class="col-sm-8">
+                    <input id="fromYear" name="fromYear" th:field="*{fromYear}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">本人作用：</label>
+                <div class="col-sm-8">
+                    <input id="myRole" name="myRole" th:field="*{myRole}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">荣获奖励：</label>
+                <div class="col-sm-8">
+                    <input id="award" name="award" th:field="*{award}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">获奖级别：</label>
+                <div class="col-sm-8">
+                    <input id="awardLevel" name="awardLevel" th:field="*{awardLevel}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">荣誉证书：</label>
+                <div class="col-sm-8">
+                    <input id="certificateHonor" name="certificateHonor" th:field="*{certificateHonor}" class="form-control" type="text">
+                </div>
+            </div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "teacher/sciresHonor"
+		$("#form-sciresHonor-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+
+        $(function() {
+            //初始化日期选择器
+            layui.use('laydate', function() {
+                var laydate = layui.laydate;
+                laydate.render({
+                    elem: '#publishedTime', //指定元素
+                    trigger: 'click'
+                });
+            });
+
+        });
+
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-sciresHonor-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

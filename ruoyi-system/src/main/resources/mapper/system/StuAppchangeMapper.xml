@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.StuAppchangeMapper">
+    
+    <resultMap type="StuAppchange" id="AppchangeResult">
+        <result property="id"    column="id"    />
+        <result property="stuid"    column="stuid"    />
+        <result property="name"    column="name"    />
+        <result property="department"    column="department"    />
+        <result property="originalProfessional"    column="original_professional"    />
+        <result property="changeProfessional"    column="change_professional"    />
+        <result property="stuClass"    column="stu_class"    />
+        <result property="reasonsChange"    column="reasons_change"    />
+        <result property="applicationChange"    column="application_change"    />
+    </resultMap>
+	
+	<sql id="selectAppchangeVo">
+        select id, stuid, name, department, original_professional, change_professional, stu_class, reasons_change, application_change from stu_appchange
+    </sql>
+	
+    <select id="selectAppchangeList" parameterType="StuAppchange" resultMap="AppchangeResult">
+        <include refid="selectAppchangeVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="stuid != null "> and stuid = #{stuid}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="department != null  and department != '' "> and department = #{department}</if>
+             <if test="originalProfessional != null  and originalProfessional != '' "> and original_professional = #{originalProfessional}</if>
+             <if test="changeProfessional != null  and changeProfessional != '' "> and change_professional = #{changeProfessional}</if>
+             <if test="stuClass != null  and stuClass != '' "> and stu_class = #{stuClass}</if>
+             <if test="reasonsChange != null  and reasonsChange != '' "> and reasons_change = #{reasonsChange}</if>
+             <if test="applicationChange != null "> and application_change = #{applicationChange}</if>
+         </where>
+    </select>
+    
+    <select id="selectAppchangeById" parameterType="Integer" resultMap="AppchangeResult">
+        <include refid="selectAppchangeVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertAppchange" parameterType="StuAppchange">
+        insert into stu_appchange
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="stuid != null  ">stuid,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="department != null  and department != ''  ">department,</if>
+			<if test="originalProfessional != null  and originalProfessional != ''  ">original_professional,</if>
+            <if test="changeProfessional != null  and changeProfessional != ''  ">change_professional,</if>
+			<if test="stuClass != null  and stuClass != ''  ">stu_class,</if>
+			<if test="reasonsChange != null  and reasonsChange != ''  ">reasons_change,</if>
+			<if test="applicationChange != null  ">application_change,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="stuid != null  ">#{stuid},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="department != null  and department != ''  ">#{department},</if>
+			<if test="originalProfessional != null  and originalProfessional != ''  ">#{originalProfessional},</if>
+            <if test="changeProfessional != null  and changeProfessional != ''  ">#{changeProfessional},</if>
+			<if test="stuClass != null  and stuClass != ''  ">#{stuClass},</if>
+			<if test="reasonsChange != null  and reasonsChange != ''  ">#{reasonsChange},</if>
+			<if test="applicationChange != null  ">#{applicationChange},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateAppchange" parameterType="StuAppchange">
+        update stu_appchange
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stuid != null  ">stuid = #{stuid},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="department != null  and department != ''  ">department = #{department},</if>
+            <if test="originalProfessional != null  and originalProfessional != ''  ">original_professional = #{originalProfessional},</if>
+            <if test="changeProfessional != null  and changeProfessional != ''  ">change_professional = #{changeProfessional},</if>
+            <if test="stuClass != null  and stuClass != ''  ">stu_class = #{stuClass},</if>
+            <if test="reasonsChange != null  and reasonsChange != ''  ">reasons_change = #{reasonsChange},</if>
+            <if test="applicationChange != null  ">application_change = #{applicationChange},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteAppchangeById" parameterType="Integer">
+        delete from stu_appchange where id = #{id}
+    </delete>
+	
+    <delete id="deleteAppchangeByIds" parameterType="String">
+        delete from stu_appchange where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

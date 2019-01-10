@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.DocProjectMapper">
+    
+    <resultMap type="DocProject" id="ProjectResult">
+        <result property="id"    column="id"    />
+        <result property="filename"    column="filename"    />
+        <result property="nowname"    column="nowname"    />
+        <result property="savepath"    column="savepath"    />
+        <result property="url"    column="url"    />
+        <result property="filetype"    column="filetype"    />
+        <result property="filesize"    column="filesize"    />
+        <result property="addtime"    column="addtime"    />
+    </resultMap>
+	
+	<sql id="selectProjectVo">
+        select id, filename, nowname, savepath, url, filetype, filesize, addtime from doc_project
+    </sql>
+	
+    <select id="selectProjectList" parameterType="DocProject" resultMap="ProjectResult">
+        <include refid="selectProjectVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="filename != null  and filename != '' "> and filename = #{filename}</if>
+             <if test="nowname != null  and nowname != '' "> and nowname = #{nowname}</if>
+             <if test="savepath != null  and savepath != '' "> and savepath = #{savepath}</if>
+             <if test="url != null  and url != '' "> and url = #{url}</if>
+             <if test="filetype != null  and filetype != '' "> and filetype = #{filetype}</if>
+             <if test="filesize != null "> and filesize = #{filesize}</if>
+             <if test="addtime != null "> and addtime = #{addtime}</if>
+         </where>
+    </select>
+    
+    <select id="selectProjectById" parameterType="Integer" resultMap="ProjectResult">
+        <include refid="selectProjectVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertProject" parameterType="DocProject">
+        insert into doc_project
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="filename != null  and filename != ''  ">filename,</if>
+			<if test="nowname != null  and nowname != ''  ">nowname,</if>
+			<if test="savepath != null  and savepath != ''  ">savepath,</if>
+			<if test="url != null  and url != ''  ">url,</if>
+			<if test="filetype != null  and filetype != ''  ">filetype,</if>
+			<if test="filesize != null  ">filesize,</if>
+			addtime
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="filename != null  and filename != ''  ">#{filename},</if>
+			<if test="nowname != null  and nowname != ''  ">#{nowname},</if>
+			<if test="savepath != null  and savepath != ''  ">#{savepath},</if>
+			<if test="url != null  and url != ''  ">#{url},</if>
+			<if test="filetype != null  and filetype != ''  ">#{filetype},</if>
+			<if test="filesize != null  ">#{filesize},</if>
+			now()
+         </trim>
+    </insert>
+	 
+    <update id="updateProject" parameterType="DocProject">
+        update doc_project
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="filename != null  and filename != ''  ">filename = #{filename},</if>
+            <if test="nowname != null  and nowname != ''  ">nowname = #{nowname},</if>
+            <if test="savepath != null  and savepath != ''  ">savepath = #{savepath},</if>
+            <if test="url != null  and url != ''  ">url = #{url},</if>
+            <if test="filetype != null  and filetype != ''  ">filetype = #{filetype},</if>
+            <if test="filesize != null  ">filesize = #{filesize},</if>
+            <if test="addtime != null  ">addtime = #{addtime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteProjectById" parameterType="Integer">
+        delete from doc_project where id = #{id}
+    </delete>
+	
+    <delete id="deleteProjectByIds" parameterType="String">
+        delete from doc_project where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

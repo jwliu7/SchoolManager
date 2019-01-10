@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-attachment-add">
+			<div class="form-group">
+				<label class="col-sm-3 control-label">业务类型：</label>
+				<div class="col-sm-8">
+					<input id="businessType" name="businessType" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">业务Id：</label>
+				<div class="col-sm-8">
+					<input id="businessId" name="businessId" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">文件路径：</label>
+				<div class="col-sm-8">
+					<input id="filePath" name="filePath" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">真实的文件名：</label>
+				<div class="col-sm-8">
+					<input id="fileNameReal" name="fileNameReal" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">显示用的文件名：</label>
+				<div class="col-sm-8">
+					<input id="fileNameShow" name="fileNameShow" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">文件大小：</label>
+				<div class="col-sm-8">
+					<input id="fileSize" name="fileSize" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">删除标记：</label>
+				<div class="col-sm-8">
+					<input id="delFlag" name="delFlag" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">创建时间：</label>
+				<div class="col-sm-8">
+					<input id="createTime" name="createTime" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-3 control-label">附件上传：</label>
+				<div class="col-sm-8">
+					<input id="file-Portrait" type="file" multiple="multiple" name="file">
+				</div>
+			</div>
+		</form>
+	</div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+        $(function() {
+
+            //初始化上传组件
+            $.file.initAddFiles("file-Portrait","file");
+
+        });
+        var prefix = ctx + "document/attachment"
+
+		$("#form-attachment-add").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/add", $('#form-attachment-add').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

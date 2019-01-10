@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.StuForeignMapper">
+    
+    <resultMap type="StuForeign" id="ForeignResult">
+        <result property="id"    column="id"    />
+        <result property="stuid"    column="stuid"    />
+        <result property="name"    column="name"    />
+        <result property="age"    column="age"    />
+        <result property="sex"    column="sex"    />
+        <result property="department"    column="department"    />
+        <result property="grade"    column="grade"    />
+        <result property="professional"    column="professional"    />
+        <result property="stuClass"    column="stu_class"    />
+        <result property="dormitory"    column="dormitory"    />
+        <result property="phone"    column="phone"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="country"    column="country"    />
+        <result property="college"    column="college"    />
+        <result property="stuTime"    column="stu_time"    />
+        <result property="studyingType"    column="studying_type"    />
+    </resultMap>
+	
+	<sql id="selectForeignVo">
+        select id, stuid, name, age, sex, department, grade, professional, stu_class, dormitory, phone, birthday, country, college, stu_time, studying_type from stu_foreign
+    </sql>
+	
+    <select id="selectForeignList" parameterType="StuForeign" resultMap="ForeignResult">
+        <include refid="selectForeignVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="stuid != null "> and stuid = #{stuid}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="age != null "> and age = #{age}</if>
+             <if test="sex != null "> and sex = #{sex}</if>
+             <if test="department != null  and department != '' "> and department = #{department}</if>
+             <if test="grade != null  and grade != '' "> and grade = #{grade}</if>
+             <if test="professional != null  and professional != '' "> and professional = #{professional}</if>
+             <if test="stuClass != null  and stuClass != '' "> and stu_class = #{stuClass}</if>
+             <if test="dormitory != null  and dormitory != '' "> and dormitory = #{dormitory}</if>
+             <if test="phone != null  and phone != '' "> and phone = #{phone}</if>
+             <if test="birthday != null "> and birthday = #{birthday}</if>
+             <if test="country != null  and country != '' "> and country = #{country}</if>
+             <if test="college != null  and college != '' "> and college = #{college}</if>
+             <if test="stuTime != null "> and stu_time = #{stuTime}</if>
+             <if test="studyingType != null  and studyingType != '' "> and studying_type = #{studyingType}</if>
+         </where>
+    </select>
+    
+    <select id="selectForeignById" parameterType="Integer" resultMap="ForeignResult">
+        <include refid="selectForeignVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertForeign" parameterType="StuForeign">
+        insert into stu_foreign
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="stuid != null  ">stuid,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="age != null  ">age,</if>
+			<if test="sex != null  ">sex,</if>
+			<if test="department != null  and department != ''  ">department,</if>
+			<if test="grade != null  and grade != ''  ">grade,</if>
+			<if test="professional != null  and professional != ''  ">professional,</if>
+			<if test="stuClass != null  and stuClass != ''  ">stu_class,</if>
+			<if test="dormitory != null  and dormitory != ''  ">dormitory,</if>
+			<if test="phone != null  and phone != ''  ">phone,</if>
+			<if test="birthday != null  ">birthday,</if>
+			<if test="country != null  and country != ''  ">country,</if>
+			<if test="college != null  and college != ''  ">college,</if>
+			<if test="stuTime != null  ">stu_time,</if>
+			<if test="studyingType != null  and studyingType != ''  ">studying_type,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="stuid != null  ">#{stuid},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="age != null  ">#{age},</if>
+			<if test="sex != null  ">#{sex},</if>
+			<if test="department != null  and department != ''  ">#{department},</if>
+			<if test="grade != null  and grade != ''  ">#{grade},</if>
+			<if test="professional != null  and professional != ''  ">#{professional},</if>
+			<if test="stuClass != null  and stuClass != ''  ">#{stuClass},</if>
+			<if test="dormitory != null  and dormitory != ''  ">#{dormitory},</if>
+			<if test="phone != null  and phone != ''  ">#{phone},</if>
+			<if test="birthday != null  ">#{birthday},</if>
+			<if test="country != null  and country != ''  ">#{country},</if>
+			<if test="college != null  and college != ''  ">#{college},</if>
+			<if test="stuTime != null  ">#{stuTime},</if>
+			<if test="studyingType != null  and studyingType != ''  ">#{studyingType},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateForeign" parameterType="StuForeign">
+        update stu_foreign
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stuid != null  ">stuid = #{stuid},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="age != null  ">age = #{age},</if>
+            <if test="sex != null  ">sex = #{sex},</if>
+            <if test="department != null  and department != ''  ">department = #{department},</if>
+            <if test="grade != null  and grade != ''  ">grade = #{grade},</if>
+            <if test="professional != null  and professional != ''  ">professional = #{professional},</if>
+            <if test="stuClass != null  and stuClass != ''  ">stu_class = #{stuClass},</if>
+            <if test="dormitory != null  and dormitory != ''  ">dormitory = #{dormitory},</if>
+            <if test="phone != null  and phone != ''  ">phone = #{phone},</if>
+            <if test="birthday != null  ">birthday = #{birthday},</if>
+            <if test="country != null  and country != ''  ">country = #{country},</if>
+            <if test="college != null  and college != ''  ">college = #{college},</if>
+            <if test="stuTime != null  ">stu_time = #{stuTime},</if>
+            <if test="studyingType != null  and studyingType != ''  ">studying_type = #{studyingType},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteForeignById" parameterType="Integer">
+        delete from stu_foreign where id = #{id}
+    </delete>
+	
+    <delete id="deleteForeignByIds" parameterType="String">
+        delete from stu_foreign where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

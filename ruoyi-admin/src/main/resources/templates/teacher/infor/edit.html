@@ -1,0 +1,215 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-infor-edit" th:object="${infor}">
+            <input id="id" name="id" th:field="*{id}"  type="hidden">
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">工号：</label>
+                <div class="col-sm-8">
+                    <input id="teaid" name="teaid" th:field="*{teaid}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">姓名：</label>
+                <div class="col-sm-8">
+                    <input id="name" name="name" th:field="*{name}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-3 control-label">性别：</label>
+                <div class="col-sm-8">
+                    <select id="sex" name="sex" class="form-control m-b" th:with="type=${@dict.getType('sys_sex')}">
+                        <option th:each="dict : ${type}" th:text="${dict.dictLabel}" th:value="${dict.dictValue}" th:field="*{sex}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">年龄：</label>
+                <div class="col-sm-8">
+                    <input id="age" name="age" th:field="*{age}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">出生日期：</label>
+                <div class="col-sm-8">
+                    <input id="birthday" name="birthday" th:field="*{birthday}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">民族：</label>
+                <div class="col-sm-8">
+                    <input id="national" name="national" th:field="*{national}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">籍贯：</label>
+                <div class="col-sm-8">
+                    <input id="place" name="place" th:field="*{place}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">所属系部：</label>
+                <div class="col-sm-8">
+                    <input id="department" name="department" th:field="*{department}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">学科方向：</label>
+                <div class="col-sm-8">
+                    <input id="discipline" name="discipline" th:field="*{discipline}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">政治面貌：</label>
+                <div class="col-sm-8">
+                    <input id="political" name="political" th:field="*{political}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">学历：</label>
+                <div class="col-sm-8">
+                    <input id="record" name="record" th:field="*{record}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">毕业时间：</label>
+                <div class="col-sm-8">
+                    <input id="gradTime" name="gradTime" th:field="*{gradTime}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">毕业学校：</label>
+                <div class="col-sm-8">
+                    <input id="gradSchool" name="gradSchool" th:field="*{gradSchool}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">毕业专业：</label>
+                <div class="col-sm-8">
+                    <input id="gradProfe" name="gradProfe" th:field="*{gradProfe}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">学位：</label>
+                <div class="col-sm-8">
+                    <input id="degree" name="degree" th:field="*{degree}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">学位获得时间：</label>
+                <div class="col-sm-8">
+                    <input id="degreeTime" name="degreeTime" th:field="*{degreeTime}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">职称：</label>
+                <div class="col-sm-8">
+                    <input id="title" name="title" th:field="*{title}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">职称确定时间：</label>
+                <div class="col-sm-8">
+                    <input id="titleTime" name="titleTime" th:field="*{titleTime}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">行政职务：</label>
+                <div class="col-sm-8">
+                    <input id="istrativeDuties" name="istrativeDuties" th:field="*{istrativeDuties}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">任职时间：</label>
+                <div class="col-sm-8">
+                    <input id="employmentTime" name="employmentTime" th:field="*{employmentTime}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">计算机过级等级：</label>
+                <div class="col-sm-8">
+                    <input id="computerRank" name="computerRank" th:field="*{computerRank}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">英语语种：</label>
+                <div class="col-sm-8">
+                    <input id="englishLanguage" name="englishLanguage" th:field="*{englishLanguage}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">英语水平：</label>
+                <div class="col-sm-8">
+                    <input id="englishLevel" name="englishLevel" th:field="*{englishLevel}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">主要教学课程：</label>
+                <div class="col-sm-8">
+                    <input id="teachingCourses" name="teachingCourses" th:field="*{teachingCourses}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">校内外及其它社会兼职：</label>
+                <div class="col-sm-8">
+                    <input id="socialpart" name="socialpart" th:field="*{socialpart}" class="form-control" type="text">
+                </div>
+            </div>
+            <div class="form-group">	
+                <label class="col-sm-3 control-label">参加何种学会任何职：</label>
+                <div class="col-sm-8">
+                    <input id="learntoserve" name="learntoserve" th:field="*{learntoserve}" class="form-control" type="text">
+                </div>
+            </div>
+		</form>
+    </div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "teacher/infor"
+		$("#form-infor-edit").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+
+        $(function() {
+            //初始化日期选择器
+            layui.use('laydate', function() {
+                var laydate = layui.laydate;
+                laydate.render({
+                    elem: '#birthday', //指定元素
+                    trigger: 'click'
+                });
+                laydate.render({
+                    elem: '#gradTime', //指定元素
+                    trigger: 'click'
+                });
+                laydate.render({
+                    elem: '#degreeTime', //指定元素
+                    trigger: 'click'
+                });
+                laydate.render({
+                    elem: '#titleTime', //指定元素
+                    trigger: 'click'
+                });
+                laydate.render({
+                    elem: '#employmentTime', //指定元素
+                    trigger: 'click'
+                });
+            });
+
+        });
+
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/edit", $('#form-infor-edit').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.TeaForeignMapper">
+    
+    <resultMap type="TeaForeign" id="ForeignResult">
+        <result property="id"    column="id"    />
+        <result property="teaid"    column="teaid"    />
+        <result property="name"    column="name"    />
+        <result property="sex"    column="sex"    />
+        <result property="age"    column="age"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="nationality"    column="nationality"    />
+        <result property="department"    column="department"    />
+        <result property="discipline"    column="discipline"    />
+        <result property="record"    column="record"    />
+        <result property="gradTime"    column="grad_time"    />
+        <result property="gradSchool"    column="grad_school"    />
+        <result property="gradProfe"    column="grad_profe"    />
+        <result property="degree"    column="degree"    />
+        <result property="degreeTime"    column="degree_time"    />
+        <result property="title"    column="title"    />
+        <result property="titleTime"    column="title_time"    />
+        <result property="istrativeDuties"    column="istrative_duties"    />
+        <result property="employmentTime"    column="employment_time"    />
+        <result property="fortype"    column="fortype"    />
+        <result property="taughtSubjects"    column="taught_subjects"    />
+        <result property="classTime"    column="class_time"    />
+    </resultMap>
+	
+	<sql id="selectForeignVo">
+        select id, teaid, name, sex, age, birthday, nationality, department, discipline, record, grad_time, grad_school, grad_profe, degree, degree_time, title, title_time, istrative_duties, employment_time, fortype, taught_subjects, class_time from tea_foreign
+    </sql>
+	
+    <select id="selectForeignList" parameterType="TeaForeign" resultMap="ForeignResult">
+        <include refid="selectForeignVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="teaid != null "> and teaid = #{teaid}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="sex != null "> and sex = #{sex}</if>
+             <if test="age != null "> and age = #{age}</if>
+             <if test="birthday != null "> and birthday = #{birthday}</if>
+             <if test="nationality != null  and nationality != '' "> and nationality = #{nationality}</if>
+             <if test="department != null  and department != '' "> and department = #{department}</if>
+             <if test="discipline != null  and discipline != '' "> and discipline = #{discipline}</if>
+             <if test="record != null  and record != '' "> and record = #{record}</if>
+             <if test="gradTime != null "> and grad_time = #{gradTime}</if>
+             <if test="gradSchool != null  and gradSchool != '' "> and grad_school = #{gradSchool}</if>
+             <if test="gradProfe != null  and gradProfe != '' "> and grad_profe = #{gradProfe}</if>
+             <if test="degree != null  and degree != '' "> and degree = #{degree}</if>
+             <if test="degreeTime != null "> and degree_time = #{degreeTime}</if>
+             <if test="title != null  and title != '' "> and title = #{title}</if>
+             <if test="titleTime != null "> and title_time = #{titleTime}</if>
+             <if test="istrativeDuties != null  and istrativeDuties != '' "> and istrative_duties = #{istrativeDuties}</if>
+             <if test="employmentTime != null "> and employment_time = #{employmentTime}</if>
+             <if test="fortype != null  and fortype != '' "> and fortype = #{fortype}</if>
+             <if test="taughtSubjects != null  and taughtSubjects != '' "> and taught_subjects = #{taughtSubjects}</if>
+             <if test="classTime != null  and classTime != '' "> and class_time = #{classTime}</if>
+         </where>
+    </select>
+    
+    <select id="selectForeignById" parameterType="Integer" resultMap="ForeignResult">
+        <include refid="selectForeignVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertForeign" parameterType="TeaForeign">
+        insert into tea_foreign
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="teaid != null  ">teaid,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="sex != null  ">sex,</if>
+			<if test="age != null  ">age,</if>
+			<if test="birthday != null  ">birthday,</if>
+			<if test="nationality != null  and nationality != ''  ">nationality,</if>
+			<if test="department != null  and department != ''  ">department,</if>
+			<if test="discipline != null  and discipline != ''  ">discipline,</if>
+			<if test="record != null  and record != ''  ">record,</if>
+			<if test="gradTime != null  ">grad_time,</if>
+			<if test="gradSchool != null  and gradSchool != ''  ">grad_school,</if>
+			<if test="gradProfe != null  and gradProfe != ''  ">grad_profe,</if>
+			<if test="degree != null  and degree != ''  ">degree,</if>
+			<if test="degreeTime != null  ">degree_time,</if>
+			<if test="title != null  and title != ''  ">title,</if>
+			<if test="titleTime != null  ">title_time,</if>
+			<if test="istrativeDuties != null  and istrativeDuties != ''  ">istrative_duties,</if>
+			<if test="employmentTime != null  ">employment_time,</if>
+			<if test="fortype != null  and fortype != ''  ">fortype,</if>
+			<if test="taughtSubjects != null  and taughtSubjects != ''  ">taught_subjects,</if>
+			<if test="classTime != null  and classTime != ''  ">class_time,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="teaid != null  ">#{teaid},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="sex != null  ">#{sex},</if>
+			<if test="age != null  ">#{age},</if>
+			<if test="birthday != null  ">#{birthday},</if>
+			<if test="nationality != null  and nationality != ''  ">#{nationality},</if>
+			<if test="department != null  and department != ''  ">#{department},</if>
+			<if test="discipline != null  and discipline != ''  ">#{discipline},</if>
+			<if test="record != null  and record != ''  ">#{record},</if>
+			<if test="gradTime != null  ">#{gradTime},</if>
+			<if test="gradSchool != null  and gradSchool != ''  ">#{gradSchool},</if>
+			<if test="gradProfe != null  and gradProfe != ''  ">#{gradProfe},</if>
+			<if test="degree != null  and degree != ''  ">#{degree},</if>
+			<if test="degreeTime != null  ">#{degreeTime},</if>
+			<if test="title != null  and title != ''  ">#{title},</if>
+			<if test="titleTime != null  ">#{titleTime},</if>
+			<if test="istrativeDuties != null  and istrativeDuties != ''  ">#{istrativeDuties},</if>
+			<if test="employmentTime != null  ">#{employmentTime},</if>
+			<if test="fortype != null  and fortype != ''  ">#{fortype},</if>
+			<if test="taughtSubjects != null  and taughtSubjects != ''  ">#{taughtSubjects},</if>
+			<if test="classTime != null  and classTime != ''  ">#{classTime},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateForeign" parameterType="TeaForeign">
+        update tea_foreign
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="teaid != null  ">teaid = #{teaid},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="sex != null  ">sex = #{sex},</if>
+            <if test="age != null  ">age = #{age},</if>
+            <if test="birthday != null  ">birthday = #{birthday},</if>
+            <if test="nationality != null  and nationality != ''  ">nationality = #{nationality},</if>
+            <if test="department != null  and department != ''  ">department = #{department},</if>
+            <if test="discipline != null  and discipline != ''  ">discipline = #{discipline},</if>
+            <if test="record != null  and record != ''  ">record = #{record},</if>
+            <if test="gradTime != null  ">grad_time = #{gradTime},</if>
+            <if test="gradSchool != null  and gradSchool != ''  ">grad_school = #{gradSchool},</if>
+            <if test="gradProfe != null  and gradProfe != ''  ">grad_profe = #{gradProfe},</if>
+            <if test="degree != null  and degree != ''  ">degree = #{degree},</if>
+            <if test="degreeTime != null  ">degree_time = #{degreeTime},</if>
+            <if test="title != null  and title != ''  ">title = #{title},</if>
+            <if test="titleTime != null  ">title_time = #{titleTime},</if>
+            <if test="istrativeDuties != null  and istrativeDuties != ''  ">istrative_duties = #{istrativeDuties},</if>
+            <if test="employmentTime != null  ">employment_time = #{employmentTime},</if>
+            <if test="fortype != null  and fortype != ''  ">fortype = #{fortype},</if>
+            <if test="taughtSubjects != null  and taughtSubjects != ''  ">taught_subjects = #{taughtSubjects},</if>
+            <if test="classTime != null  and classTime != ''  ">class_time = #{classTime},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteForeignById" parameterType="Integer">
+        delete from tea_foreign where id = #{id}
+    </delete>
+	
+    <delete id="deleteForeignByIds" parameterType="String">
+        delete from tea_foreign where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html  lang="zh" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<body class="white-bg">
+    <div class="wrapper wrapper-content animated fadeInRight ibox-content">
+        <form class="form-horizontal m" id="form-perfor-add">
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">学号：</label>
+				<div class="col-sm-8">
+					<input id="stuid" name="stuid" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">学生姓名：</label>
+				<div class="col-sm-8">
+					<input id="name" name="name" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">参与活动：</label>
+				<div class="col-sm-8">
+					<input id="activities" name="activities" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">荣誉称号：</label>
+				<div class="col-sm-8">
+					<input id="honor" name="honor" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">发表专著：</label>
+				<div class="col-sm-8">
+					<input id="monographs" name="monographs" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">成果奖项：</label>
+				<div class="col-sm-8">
+					<input id="achievement" name="achievement" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">参与项目：</label>
+				<div class="col-sm-8">
+					<input id="projectinvo" name="projectinvo" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">惩处违纪：</label>
+				<div class="col-sm-8">
+					<input id="violation" name="violation" class="form-control" type="text">
+				</div>
+			</div>
+			<div class="form-group">	
+				<label class="col-sm-3 control-label">学生干部：</label>
+				<div class="col-sm-8">
+					<input id="cadres" name="cadres" class="form-control" type="text">
+				</div>
+			</div>
+		</form>
+	</div>
+    <div th:include="include::footer"></div>
+    <script type="text/javascript">
+		var prefix = ctx + "student/perfor"
+		$("#form-perfor-add").validate({
+			rules:{
+				xxxx:{
+					required:true,
+				},
+			}
+		});
+		
+		function submitHandler() {
+	        if ($.validate.form()) {
+	            $.operate.save(prefix + "/add", $('#form-perfor-add').serialize());
+	        }
+	    }
+	</script>
+</body>
+</html>

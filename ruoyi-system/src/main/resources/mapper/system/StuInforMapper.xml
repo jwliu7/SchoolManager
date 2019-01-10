@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.system.mapper.StuInforMapper">
+    
+    <resultMap type="StuInfor" id="InforResult">
+        <result property="id"    column="id"    />
+        <result property="stuid"    column="stuid"    />
+        <result property="name"    column="name"    />
+        <result property="age"    column="age"    />
+        <result property="sex"    column="sex"    />
+        <result property="department"    column="department"    />
+        <result property="professional"    column="professional"    />
+        <result property="grade"    column="grade"    />
+        <result property="stuClass"    column="stu_class"    />
+        <result property="dormitory"    column="dormitory"    />
+        <result property="national"    column="national"    />
+        <result property="nativePlace"    column="native_place"    />
+        <result property="political"    column="political"    />
+        <result property="contact"    column="contact"    />
+        <result property="birthday"    column="birthday"    />
+        <result property="address"    column="address"    />
+        <result property="phone"    column="phone"    />
+        <result property="stuPoor"    column="stu_poor"    />
+    </resultMap>
+	
+	<sql id="selectInforVo">
+        select id, stuid, name, age, sex, department, professional, grade, stu_class, dormitory, national, native_place, political, contact, birthday, address, phone, stu_poor from stu_infor
+    </sql>
+	
+    <select id="selectInforList" parameterType="StuInfor" resultMap="InforResult">
+        <include refid="selectInforVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="stuid != null "> and stuid = #{stuid}</if>
+             <if test="name != null  and name != '' "> and name = #{name}</if>
+             <if test="age != null "> and age = #{age}</if>
+             <if test="sex != null "> and sex = #{sex}</if>
+             <if test="department != null  and department != '' "> and department = #{department}</if>
+             <if test="professional != null  and professional != '' "> and professional = #{professional}</if>
+             <if test="grade != null  and grade != '' "> and grade = #{grade}</if>
+             <if test="stuClass != null  and stuClass != '' "> and stu_class = #{stuClass}</if>
+             <if test="dormitory != null  and dormitory != '' "> and dormitory = #{dormitory}</if>
+             <if test="national != null  and national != '' "> and national = #{national}</if>
+             <if test="nativePlace != null  and nativePlace != '' "> and native_place = #{nativePlace}</if>
+             <if test="political != null  and political != '' "> and political = #{political}</if>
+             <if test="contact != null  and contact != '' "> and contact = #{contact}</if>
+             <if test="birthday != null "> and birthday = #{birthday}</if>
+             <if test="address != null  and address != '' "> and address = #{address}</if>
+             <if test="phone != null  and phone != '' "> and phone = #{phone}</if>
+             <if test="stuPoor != null "> and stu_poor = #{stuPoor}</if>
+         </where>
+    </select>
+    
+    <select id="selectInforById" parameterType="Integer" resultMap="InforResult">
+        <include refid="selectInforVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertInfor" parameterType="StuInfor">
+        insert into stu_infor
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="stuid != null  ">stuid,</if>
+			<if test="name != null  and name != ''  ">name,</if>
+			<if test="age != null  ">age,</if>
+			<if test="sex != null  ">sex,</if>
+			<if test="department != null  and department != ''  ">department,</if>
+			<if test="professional != null  and professional != ''  ">professional,</if>
+			<if test="grade != null  and grade != ''  ">grade,</if>
+			<if test="stuClass != null  and stuClass != ''  ">stu_class,</if>
+			<if test="dormitory != null  and dormitory != ''  ">dormitory,</if>
+			<if test="national != null  and national != ''  ">national,</if>
+			<if test="nativePlace != null  and nativePlace != ''  ">native_place,</if>
+			<if test="political != null  and political != ''  ">political,</if>
+			<if test="contact != null  and contact != ''  ">contact,</if>
+			<if test="birthday != null  ">birthday,</if>
+			<if test="address != null  and address != ''  ">address,</if>
+			<if test="phone != null  and phone != ''  ">phone,</if>
+			<if test="stuPoor != null  ">stu_poor,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="stuid != null  ">#{stuid},</if>
+			<if test="name != null  and name != ''  ">#{name},</if>
+			<if test="age != null  ">#{age},</if>
+			<if test="sex != null  ">#{sex},</if>
+			<if test="department != null  and department != ''  ">#{department},</if>
+			<if test="professional != null  and professional != ''  ">#{professional},</if>
+			<if test="grade != null  and grade != ''  ">#{grade},</if>
+			<if test="stuClass != null  and stuClass != ''  ">#{stuClass},</if>
+			<if test="dormitory != null  and dormitory != ''  ">#{dormitory},</if>
+			<if test="national != null  and national != ''  ">#{national},</if>
+			<if test="nativePlace != null  and nativePlace != ''  ">#{nativePlace},</if>
+			<if test="political != null  and political != ''  ">#{political},</if>
+			<if test="contact != null  and contact != ''  ">#{contact},</if>
+			<if test="birthday != null  ">#{birthday},</if>
+			<if test="address != null  and address != ''  ">#{address},</if>
+			<if test="phone != null  and phone != ''  ">#{phone},</if>
+			<if test="stuPoor != null  ">#{stuPoor},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateInfor" parameterType="StuInfor">
+        update stu_infor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="stuid != null  ">stuid = #{stuid},</if>
+            <if test="name != null  and name != ''  ">name = #{name},</if>
+            <if test="age != null  ">age = #{age},</if>
+            <if test="sex != null  ">sex = #{sex},</if>
+            <if test="department != null  and department != ''  ">department = #{department},</if>
+            <if test="professional != null  and professional != ''  ">professional = #{professional},</if>
+            <if test="grade != null  and grade != ''  ">grade = #{grade},</if>
+            <if test="stuClass != null  and stuClass != ''  ">stu_class = #{stuClass},</if>
+            <if test="dormitory != null  and dormitory != ''  ">dormitory = #{dormitory},</if>
+            <if test="national != null  and national != ''  ">national = #{national},</if>
+            <if test="nativePlace != null  and nativePlace != ''  ">native_place = #{nativePlace},</if>
+            <if test="political != null  and political != ''  ">political = #{political},</if>
+            <if test="contact != null  and contact != ''  ">contact = #{contact},</if>
+            <if test="birthday != null  ">birthday = #{birthday},</if>
+            <if test="address != null  and address != ''  ">address = #{address},</if>
+            <if test="phone != null  and phone != ''  ">phone = #{phone},</if>
+            <if test="stuPoor != null  ">stu_poor = #{stuPoor},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteInforById" parameterType="Integer">
+        delete from stu_infor where id = #{id}
+    </delete>
+	
+    <delete id="deleteInforByIds" parameterType="String">
+        delete from stu_infor where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>
