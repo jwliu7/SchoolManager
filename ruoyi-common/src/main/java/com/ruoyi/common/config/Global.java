@@ -51,7 +51,7 @@ public class Global
     }
 
     /**
-     * 获取配置
+     * 获取配置 key=ruoyi.profile
      */
     public static String getConfig(String key)
     {
