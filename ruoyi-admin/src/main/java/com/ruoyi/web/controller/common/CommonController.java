@@ -6,6 +6,7 @@ import java.net.URLEncoder;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.common.file.UploadUtil;
 import com.ruoyi.common.json.JSONObject;
 import com.ruoyi.framework.util.FileUploadUtils;
 import com.ruoyi.system.domain.DocAppretrsch;
@@ -13,6 +14,7 @@ import com.ruoyi.system.service.IDocAppretrschService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.ruoyi.common.config.Global;
@@ -29,7 +31,10 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class CommonController
 {
-
+    @Value("E:/profile/")
+    private String docBase;
+    @Autowired
+    private UploadUtil uploadUtil;
     @Autowired
     private IDocAppretrschService iDocAppretrschService;
 
@@ -39,17 +44,16 @@ public class CommonController
     public void fileDownload(String fileName, Boolean delete, HttpServletResponse response, HttpServletRequest request)
     {
         DocAppretrsch docAppretrsch = iDocAppretrschService.selectAppretrschById (Integer.valueOf (fileName));
-        fileName=docAppretrsch.getFilename ();
+        fileName=docAppretrsch.getNowname ();
         String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
         try
         {
-            String filePath = Global.getDownloadPath() + fileName;
-
+            String filePath = uploadUtil.getFilePath(docBase, fileName);
             response.setCharacterEncoding("utf-8");
             response.setContentType("multipart/form-data");
             response.setHeader("Content-Disposition", "attachment;fileName=" + setFileDownloadHeader(request, realFileName));
             FileUtils.writeBytes(filePath, response.getOutputStream());
-            if (delete)
+            if (true)
             {
                 FileUtils.deleteFile(filePath);
             }
