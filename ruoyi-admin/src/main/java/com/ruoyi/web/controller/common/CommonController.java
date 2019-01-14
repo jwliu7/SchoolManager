@@ -8,8 +8,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.common.json.JSONObject;
 import com.ruoyi.framework.util.FileUploadUtils;
+import com.ruoyi.system.domain.DocAppretrsch;
+import com.ruoyi.system.service.IDocAppretrschService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.ruoyi.common.config.Global;
@@ -26,11 +29,17 @@ import org.springframework.web.multipart.MultipartFile;
 @Controller
 public class CommonController
 {
+
+    @Autowired
+    private IDocAppretrschService iDocAppretrschService;
+
     private static final Logger log = LoggerFactory.getLogger(CommonController.class);
 
     @RequestMapping("common/download")
     public void fileDownload(String fileName, Boolean delete, HttpServletResponse response, HttpServletRequest request)
     {
+        DocAppretrsch docAppretrsch = iDocAppretrschService.selectAppretrschById (Integer.valueOf (fileName));
+        fileName=docAppretrsch.getFilename ();
         String realFileName = System.currentTimeMillis() + fileName.substring(fileName.indexOf("_") + 1);
         try
         {
